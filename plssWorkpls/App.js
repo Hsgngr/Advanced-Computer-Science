@@ -3,18 +3,12 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
-import { Map, GoogleApiWrapper } from 'google-maps-react';
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyDLDu6TJi3uBfpwIxurvK5p46SPEgHmDkg'
-})(MapContainer);
-
-/* export default class App extends Component {
+export default class App extends Component {
   state = {
     location: null,
     errorMessage: null,
-  }; */
-
+  };
 
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
@@ -47,15 +41,9 @@ export default GoogleApiWrapper({
     }
 
     return (
-      <Map
-      google={this.props.google}
-      zoom={8}
-      style={mapStyles}
-      initialCenter={{ lat: 47.444, lng: -122.176}}
-    />
-     /* <View style={styles.container}>
+      <View style={styles.container}>
         <Text style={styles.paragraph}>{text}</Text>
-      </View> */
+      </View>
     );
   }
 }
