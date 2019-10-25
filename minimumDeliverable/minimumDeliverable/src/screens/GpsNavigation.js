@@ -3,6 +3,7 @@ import { Platform, Text, View, StyleSheet } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
+import MapView from 'react-native-maps';
 
 export default class App extends Component {
   state = {
@@ -25,26 +26,48 @@ export default class App extends Component {
     if (status !== 'granted') {
       this.setState({
         errorMessage: 'Permission to access location was denied',
+        loaded: true
       });
+    } else {
+      // only check the location if it has been granted
+      // you also may want to wrap this in a try/catch as async functions can throw
+      let location = await Location.getCurrentPositionAsync({ enableHighAccuracy: true });
+      this.setState({ location, loaded: true, errorMessage: null });
     }
-
-    let location = await Location.getCurrentPositionAsync({});
-    this.setState({ location });
   };
 
-  render() {
-    let text = 'Waiting..';
-    if (this.state.errorMessage) {
-      text = this.state.errorMessage;
-    } else if (this.state.location) {
-      text = JSON.stringify(this.state.location);
+  render () {
+    // check to see if we have loaded
+    if (this.state.loaded) {
+      // if we have an error message show it
+      if (this.state.errorMessage) {
+        return (
+          <View style={styles.container}>
+            <Text>{JSON.stringify(this.state.errorMessage)}</Text>
+          </View>
+        );
+      } else if (this.state.location) {
+        // if we have a location show it
+        return (
+          <MapView
+            style={{ flex: 1 }}
+            region={{
+              latitude: this.state.location.coords.latitude,
+              longitude: this.state.location.coords.longitude,
+              latitudeDelta: 0.1,
+              longitudeDelta: 0.1
+            }}
+          />
+        );
+      }
+    } else {
+      // if we haven't loaded show a waiting placeholder
+      return (
+        <View style={styles.container}>
+          <Text>Waiting...</Text>
+        </View>
+      );
     }
-
-    return (
-      <View style={styles.container}>
-        <Text style={styles.paragraph}>{text}</Text>
-      </View>
-    );
   }
 }
 
@@ -54,11 +77,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#ecf0f1',
+    backgroundColor: '#ecf0f1'
   },
   paragraph: {
     margin: 24,
     fontSize: 18,
-    textAlign: 'center',
-  },
+    textAlign: 'center'
+  }
 });
