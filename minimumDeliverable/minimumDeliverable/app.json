@@ -1,9 +1,9 @@
 {
   "expo": {
-    "name": "plsWork",
-    "slug": "plssWorkpls",
+    "name": "exmulti",
+    "slug": "exmulti",
     "privacy": "public",
-    "sdkVersion": "35.0.0",
+    "sdkVersion": "33.0.0",
     "platforms": [
       "ios",
       "android",

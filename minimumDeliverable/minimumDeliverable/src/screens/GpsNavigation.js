@@ -9,7 +9,7 @@ export default class App extends Component {
     location: null,
     errorMessage: null,
   };
-
+  
   componentWillMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
