@@ -7,7 +7,7 @@ const HomeScreen = props => {
       <Text style={styles.container}>Welcome to the Good Place</Text>
       <Button 
         onPress= {() => props.navigation.navigate('Navigation')} 
-        title= "Navigation" 
+        title= "Navigation Demo" 
         />
         
       <Button 
