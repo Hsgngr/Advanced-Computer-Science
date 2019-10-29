@@ -28,7 +28,9 @@ const styles = StyleSheet.create({
   container: {
     fontSize: 25,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    paddingVertical:16,
+    justifyContent:'center'
   
   }
 });

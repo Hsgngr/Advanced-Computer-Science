@@ -1,9 +1,22 @@
 import React, { Component } from 'react';
-import { Platform, Text, View, StyleSheet } from 'react-native';
+import { Platform, Text, View, StyleSheet, Button } from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapView from 'react-native-maps';
+
+const EIFFEL_TOWER = {
+  latitude: 48.858570,
+  longitude: 2.294493,
+  latitudeDelta: 0.02,
+  longitudeDelta: 0.02
+};
+const GOOGLE_PLEX = {
+  latitude: 37.422264,
+  longitude: -122.084036,
+  latitudeDelta: 0.02,
+  longitudeDelta: 0.02
+};
 
 export default class App extends Component {
   state = {
@@ -36,6 +49,8 @@ export default class App extends Component {
     }
   };
 
+  _showEiffelTower = () => this.setState({ region: GOOGLE_PLEX }); //Not working its hard
+
   render () {
     // check to see if we have loaded
     if (this.state.loaded) {
@@ -49,22 +64,28 @@ export default class App extends Component {
       } else if (this.state.location) {
         // if we have a location show it
         return (
-          <MapView
-            style={{ flex: 1 }}
-            region={{
-              latitude: this.state.location.coords.latitude,
-              longitude: this.state.location.coords.longitude,
-              latitudeDelta: 0.1,
-              longitudeDelta: 0.1
-            }}
-          />
+          <View style={ styles.container2 }>  
+            <MapView
+              //style={{ flex: 1 }}
+              style={ styles.mapViewContainer }
+              region={{
+                latitude: this.state.location.coords.latitude,
+                longitude: this.state.location.coords.longitude,
+                latitudeDelta: 0.05,
+                longitudeDelta: 0.05
+              }}
+            />
+            <View style={ styles.buttonsContainer }>
+          <Button title={ 'University of Sussex'} onPress={ this._showEiffelTower }/>
+        </View> 
+          </View>    
         );
       }
     } else {
       // if we haven't loaded show a waiting placeholder
       return (
         <View style={styles.container}>
-          <Text>Waiting...</Text>
+          <Text style = {styles.paragraph}>Loading...</Text>
         </View>
       );
     }
@@ -72,17 +93,26 @@ export default class App extends Component {
 }
 
 const styles = StyleSheet.create({
+  container2: { flex: 1, backgroundColor: 'white' },
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
     paddingTop: Constants.statusBarHeight,
-    backgroundColor: '#8cf2ff'
+    backgroundColor: 'white' //#8cf2ff
   },
   paragraph: {
     margin: 24,
-    fontSize: 18,
-    textAlign: 'center'
+    fontSize: 24,
+    textAlign: 'center',
+    backgroundColor: 'white'
   },
+  mapViewContainer: { flex: 15/16 },
+  buttonsContainer: {
+    flex : 1/16,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    paddingVertical: 16
+  }
 
 });
