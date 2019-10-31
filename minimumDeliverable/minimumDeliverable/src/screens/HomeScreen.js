@@ -4,10 +4,10 @@ import { Text, StyleSheet, View, Button, TouchableOpacity} from 'react-native';
 const HomeScreen = props => {
   return (
   <View>
-      <Text style={styles.container}>Welcome to the Good Place</Text>
+      <Text style={styles.text}>Welcome to the Good Place</Text>
       <Button 
         onPress= {() => props.navigation.navigate('Navigation')} 
-        title= "Navigation Demo" 
+        title= "Navigation" 
         />
         
       <Button 
@@ -24,14 +24,6 @@ const HomeScreen = props => {
 const styles = StyleSheet.create({
   text: {
     fontSize: 25
-  },
-  container: {
-    fontSize: 25,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical:16,
-    justifyContent:'center'
-  
   }
 });
 
