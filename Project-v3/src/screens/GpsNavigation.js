@@ -18,6 +18,14 @@ const EIFFEL_TOWER = {
   longitudeDelta: 0.02
 };
 
+const UNIVERSITY_SUSSEX= {
+  latitude: 50.860798412471716,
+  longitude: -0.08990714542439898,
+  latitudeDelta: 0.02,
+  longitudeDelta: 0.02
+
+}
+
 export default class App extends Component <Props, State> {
   constructor(props: Props) {
     super(props);
@@ -49,7 +57,8 @@ export default class App extends Component <Props, State> {
     }
   };
 
-    _showEiffelTower = (): void => this.setState({ region: EIFFEL_TOWER }); //Not working its hard
+    _showEiffelTower = (): void => this.setState({ region: EIFFEL_TOWER });
+     _showUniversityOfSussex = (): void => this.setState({ region: UNIVERSITY_SUSSEX }); //Not working its hard
 
   render () {
     // check to see if we have loaded
@@ -78,7 +87,7 @@ export default class App extends Component <Props, State> {
               }} */
             />
             <View style={ styles.buttonsContainer }>
-          <Button title={ 'University of Sussex'} onPress={ this._showEiffelTower }/>
+          <Button title={ 'University of Sussex'} onPress={ this._showUniversityOfSussex }/>
           <Button title={ 'Eiffel Tower'} onPress={ this._showEiffelTower }/>
         </View> 
           </View>    
