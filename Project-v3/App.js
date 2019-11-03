@@ -21,7 +21,7 @@ const AppNavigator = createStackNavigator(
     Navigation: GpsNavigation
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'Navigation',
   }
 );
 

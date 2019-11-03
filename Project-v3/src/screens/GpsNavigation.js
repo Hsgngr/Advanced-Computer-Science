@@ -26,6 +26,15 @@ const UNIVERSITY_SUSSEX= {
 
 }
 
+/* const MY_LOCATION = {
+  latitude:this.state.location.coords.latitude,
+  longitude: this.state.location.coords.longitude,
+  latitudeDelta: 0.05,
+  longitudeDelta: 0.05
+
+}
+ */
+
 export default class App extends Component <Props, State> {
   constructor(props: Props) {
     super(props);
@@ -56,9 +65,9 @@ export default class App extends Component <Props, State> {
       this.setState({ location, loaded: true, errorMessage: null });
     }
   };
-
-    _showEiffelTower = (): void => this.setState({ region: EIFFEL_TOWER });
-     _showUniversityOfSussex = (): void => this.setState({ region: UNIVERSITY_SUSSEX }); //Not working its hard
+      _showMyLocation = (): void => this.setState({ region: MY_LOCATION }); 
+      _showEiffelTower = (): void => this.setState({ region: EIFFEL_TOWER });
+      _showUniversityOfSussex = (): void => this.setState({ region: UNIVERSITY_SUSSEX }); //Not working its hard
 
   render () {
     // check to see if we have loaded
@@ -71,14 +80,22 @@ export default class App extends Component <Props, State> {
           </View>
         );
       } else if (this.state.location) {
+        
+   MY_LOCATION = {
+  latitude:this.state.location.coords.latitude,
+  longitude: this.state.location.coords.longitude,
+  latitudeDelta: 0.01,
+  longitudeDelta: 0.01
+}
         // if we have a location show it
         return (
+          
           <View style={ styles.container2 }>  
             <MapView
               //style={{ flex: 1 }}
              style={ styles.mapViewContainer }
              provider={ PROVIDER_GOOGLE }
-             region={ this.state.region }
+             region={ this.state.region } // TODO: This should be fixed -> It should show myLocation at start.
               /* region={{
                 latitude: this.state.location.coords.latitude,
                 longitude: this.state.location.coords.longitude,
@@ -88,7 +105,7 @@ export default class App extends Component <Props, State> {
             />
             <View style={ styles.buttonsContainer }>
           <Button title={ 'University of Sussex'} onPress={ this._showUniversityOfSussex }/>
-          <Button title={ 'Eiffel Tower'} onPress={ this._showEiffelTower }/>
+           <Button title={ 'My Location'} onPress={ this._showMyLocation }/>
         </View> 
           </View>    
         );
@@ -109,7 +126,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-end',
     paddingTop: Constants.statusBarHeight,
     backgroundColor: 'white' //#8cf2ff
   },
