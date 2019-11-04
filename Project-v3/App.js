@@ -5,6 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import creditsScene from './src/screens/creditsScene';
 import GpsNavigation from './src/screens/GpsNavigation';
+import dataFetching from  './src/components/dataFetching';
+//import dataFetchingPost from  './src/components/dataFetchingPost';
 
 /* export default function App() {
   return (
@@ -18,10 +20,11 @@ const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Credits: creditsScene,
-    Navigation: GpsNavigation
+    Navigation: GpsNavigation,
+    Data: dataFetching,
   },
   {
-    initialRouteName: 'Navigation',
+    initialRouteName: 'Data',
   }
 );
 
