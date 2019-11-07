@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "550084103601",
+    "firebase_url": "https://fetchproject-fefde.firebaseio.com",
+    "project_id": "fetchproject-fefde",
+    "storage_bucket": "fetchproject-fefde.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550084103601:android:82c2e988e9abee02c10190",
+        "android_client_info": {
+          "package_name": "com.hosgungor.taskfirebase"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "550084103601-mi2eohgf8ku5dseub497d22kabut4oti.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0DkvuX3n2gpTsQBJW7VH7R24WZeD6eJw"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "550084103601-mi2eohgf8ku5dseub497d22kabut4oti.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
