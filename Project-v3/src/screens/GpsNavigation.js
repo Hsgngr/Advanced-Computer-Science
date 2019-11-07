@@ -41,7 +41,7 @@ export default class App extends Component <Props, State> {
     this.state = { region: null };
   }
   
-  componentWillMount() {
+  componentDidMount() {
     if (Platform.OS === 'android' && !Constants.isDevice) {
       this.setState({
         errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
