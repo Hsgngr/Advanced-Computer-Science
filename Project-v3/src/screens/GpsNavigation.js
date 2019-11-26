@@ -4,9 +4,9 @@ import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+
 import type {Region} from 'react-native-maps';
 import postCodes from "../Api/postCodes";
-import MapHeatmap from "react-native-maps/lib/components/MapHeatmap";
 
 type
     Props = {};
@@ -109,7 +109,6 @@ export default class App extends Component <Props, State> {
                               longitudeDelta: 0.05
                             }} */
                         />
-
                         <View style={styles.buttonsContainer}>
                             <Button title={'University of Sussex'} onPress={this._showUniversityOfSussex}/>
                             <Button title={'My Location'} onPress={this._showMyLocation}/>
