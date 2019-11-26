@@ -5,6 +5,14 @@ const HomeScreen = props => {
   return (
   <View>
       <Text style={styles.text}>Welcome to the Good Place</Text>
+      <Button
+          onPress= {() => props.navigation.navigate('MapScreen')}
+          title= "Map Demo"
+      />
+      <Button
+          onPress= {() => props.navigation.navigate('FetchScreen')}
+          title= "Fetch Demo"
+      />
       <Button 
         onPress= {() => props.navigation.navigate('Navigation')} 
         title= "Navigation" 
