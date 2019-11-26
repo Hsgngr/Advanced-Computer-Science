@@ -5,7 +5,8 @@ import { createStackNavigator } from 'react-navigation-stack';
 import HomeScreen from './src/screens/HomeScreen';
 import creditsScene from './src/screens/creditsScene';
 import GpsNavigation from './src/screens/GpsNavigation';
-import dataFetching from  './src/components/dataFetching';
+import FetchScreen from "./src/screens/FetchScreen";
+import MapScreen from "./src/screens/MapScreen";
 //import dataFetchingPost from  './src/components/dataFetchingPost';
 
 /* export default function App() {
@@ -21,10 +22,12 @@ const AppNavigator = createStackNavigator(
     Home: HomeScreen,
     Credits: creditsScene,
     Navigation: GpsNavigation,
-    Data: dataFetching,
+    FetchScreen: FetchScreen,
+      MapScreen: MapScreen,
+
   },
   {
-    initialRouteName: 'Data',
+    initialRouteName: 'Home',
   }
 );
 
