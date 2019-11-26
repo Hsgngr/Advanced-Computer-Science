@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aae9e750-960e-4488-a2a4-a36c0cba8767" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/screens/GpsNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/GpsNavigation.js" afterDir="false" />
-    </list>
+    <list default="true" id="aae9e750-960e-4488-a2a4-a36c0cba8767" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -61,7 +59,7 @@
       <workItem from="1574104913668" duration="5632000" />
       <workItem from="1574364646715" duration="15918000" />
       <workItem from="1574637371611" duration="6403000" />
-      <workItem from="1574784103443" duration="797000" />
+      <workItem from="1574784103443" duration="1074000" />
     </task>
     <servers />
   </component>
