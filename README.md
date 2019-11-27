@@ -37,9 +37,14 @@ To run the task4 there are more things you should do, since it needs a local ser
 cd track-server
 npm run dev
 ```
+For every 8 hours you should change the url in Advanced-Computer-Science\task4\src\api\tracker.js
+BaseURL: '<yourURl>'
+  
 ```
 ngrok http 3000
 ```
+By running npm start in repository will open a localhost in your browser where you can scan the qr code with your device or connect virtual devices 
+
 ```
 npm start
 ```
