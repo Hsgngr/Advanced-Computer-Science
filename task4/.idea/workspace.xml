@@ -2,13 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b300790a-f555-4219-be7e-c9af52a06c50" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/task4.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project-v3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project-v3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project-v3/src/screens/MapScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Project-v3/src/screens/MapScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/api/tracker.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/components/Spacer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/AuthContext.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/context/createDataContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/App.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/SignupScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SignupScreen.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -50,7 +52,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574820967653</updated>
-      <workItem from="1574820968966" duration="1732000" />
+      <workItem from="1574820968966" duration="7000000" />
     </task>
     <servers />
   </component>

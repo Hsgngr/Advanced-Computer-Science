@@ -10,22 +10,31 @@ import SignupScreen from "./src/screens/SignupScreen";
 import TrackCreateScreen from "./src/screens/TrackCreateScreen";
 import TrackDetailScreen from "./src/screens/TrackDetailScreen";
 import TrackListScreen from "./src/screens/TrackListScreen";
+import {Provider as AuthProvider} from "./src/context/AuthContext";
 
 const switchNavigator = createSwitchNavigator({
     loginFlow: createStackNavigator({
         Signup: SignupScreen,
         Signin: SigninScreen
     }),
-        mainFlow: createBottomTabNavigator({
-          Map: MapScreen,
-          trackListFlow: createStackNavigator({
-              TrackList: TrackListScreen,
-              TrackDetailScreen: TrackDetailScreen
-          }),
-          TrackCreate: TrackCreateScreen,
-          Account: AccountScreen,
-            
-        })
+    mainFlow: createBottomTabNavigator({
+        Map: MapScreen,
+        trackListFlow: createStackNavigator({
+            TrackList: TrackListScreen,
+            TrackDetailScreen: TrackDetailScreen
+        }),
+        TrackCreate: TrackCreateScreen,
+        Account: AccountScreen,
+
+    })
 });
 
-export default createAppContainer(switchNavigator);
+const App = createAppContainer(switchNavigator);
+
+export default () => {
+    return (
+        <AuthProvider>
+            <App/>
+        </AuthProvider>
+    )
+}
