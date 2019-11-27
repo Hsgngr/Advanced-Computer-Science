@@ -1,12 +1,16 @@
 # Advanced-Computer-Science
-Advanced Computer Science Project
-# Project Title
+Advanced Software Engineering Project
 
-One Paragraph of project description goes here
+This project is developed for Advanced software engineering course which encourage students to agile development and simulate real industry problems.
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+You can clone the repo and see one by one our milestones of our project.
+```
+git clone https://github.com/Hsgngr/Advanced-Computer-Science
+cd Project
+npm start
+```
 
 ### Prerequisites
 
