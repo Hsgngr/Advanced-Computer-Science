@@ -15,15 +15,16 @@ router.get('/locationData', async (req, res) => {
 });
 
 router.post('/locationData', async (req, res) => {
-    const {name, locations} = req.body;
+    const {coords} = req.body;
 
-    if(!name || !locations){
-        return res.status(422).send({error: 'You must provide a name and locations'});
+    if(!coords){
+        return res.status(422).send({error: 'You must provide coordinations'});
     }
     try{
-        const track = new Track({name, locations, userId: req.user._id});
-    await track.save();
-    res.send(track);
+        const userData = new locationData({userId: req.user._id, coords});
+    await userData.save();
+    res.send('A bunch of points array');
+    //res.send(userData); // Here it will come the BN Code database results
     } catch (err){
         res.status(422).send({error: err.message})
     }
