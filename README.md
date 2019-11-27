@@ -14,8 +14,9 @@ npm start
 
 ### Prerequisites
 
-If you want to use android emulator, You should install Android Studio and set up a virtual device.
-If you are going to use it with your device, you need to install expo app to your physical devices.
+* If you run this project on an android emulator, You should install Android Studio and set up a virtual device.
+
+* If you run on your own device, you need to install expo app to your physical device.
 
 ```
 npm install expo-cli
@@ -46,33 +47,30 @@ npm start
 
 ## Running the tests
 
- Postman for testing post requests of custom api
- Nodemon: for Automation Restarts of server
-
-
+ * Postman for testing post requests of custom api
+ * Nodemon: for Automation Restarts of server
+ * JSONWEBTOKEN for privacy of authentication (To protect user data from malacious reasons)
 
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
+
 * [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [React Native](https://facebook.github.io/react-native/) -  Cross-Platform framework for mobile application
+* [Express Api](https://expressjs.com/en/api.html) - Building a REST API: Express, Node.js web application framework
+* [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) - Global cloud database service deploy with Google Cloud Platform
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Ege Hoşgüngör** - *Initial work* - [Hsgngr](https://github.com/Hsgngr)
+* **Ege Hoşgüngör** - *Full stack developer /Team Leader* - [Hsgngr](https://github.com/Hsgngr)
 
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [None](https://github.com/your/project/contributors) who participated in this project.
 
 
 ## Acknowledgments
 
-* Mostly inspired from Udemy courses and stackoverflow
-
+Mostly inspired from Udemy courses and stackoverflow
 
 Our Trello Account:
 https://trello.com/b/OcuCUrDH/software-project
@@ -82,29 +80,4 @@ https://docs.google.com/document/d/1Frkdjs8Y-WWoasVZkAv5nXN7yNbtiETGtaL7AlvJCm8/
 
 Our Project Plan:
 https://docs.google.com/document/d/15UwbPw09sZm3PpbBOhXMPql8ygIRWEpavoZHbAj75j8/edit?usp=sharing
-
-
-To download this project try to use git Lfs. 
-Download from here: https://git-lfs.github.com/
-After installing the lfs you need to pull the project with : git lfs pull
-
-Current Used Technologies:
-
-  Cross-Platform framework for mobile application: React Native
-    Expo: for debugging and running while developing
-    axios: Package for better fetch
-    react-native-elements: for having more customized components
-    react-native-gesture-handler: for user gesture interaction
-    react-native-animated : for animations of screen handling
-    react-navigation-stack, react-navigation-tab : The navigation types that we used
-    
-  Cloud Database: MongoDB Atlas with Google Cloud Platform
-
-
-  Server Based:
-    Building a REST API: Express, Node.js web application framework
-    Nodemon: for Automation Restarts of server
-    Postman for testing post requests of custom api
-    JSONWEBTOKEN for privacy of authentication (To protect user data from malacious reasons)
-
 
