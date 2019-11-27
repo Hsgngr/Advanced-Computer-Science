@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="aae9e750-960e-4488-a2a4-a36c0cba8767" name="Default Changelist" comment="" />
+    <list default="true" id="aae9e750-960e-4488-a2a4-a36c0cba8767" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/MapScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MapScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,7 +27,7 @@
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Data" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../task4" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Mappings" />
   </component>
@@ -60,6 +64,7 @@
       <workItem from="1574364646715" duration="15918000" />
       <workItem from="1574637371611" duration="6403000" />
       <workItem from="1574784103443" duration="1273000" />
+      <workItem from="1574790982208" duration="2003000" />
     </task>
     <servers />
   </component>

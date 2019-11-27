@@ -18,7 +18,7 @@ export default class App extends React.Component {
     }
     onRegionChangeComplete = (region) => {
         this.setState({region});
-       // console.log(region);
+       console.log(region);
     }
     render() {
         if(!this.state.mapLoaded) {
