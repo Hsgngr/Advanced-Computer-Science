@@ -27,6 +27,7 @@ Current Used Technologies:
     
   Cloud Database: MongoDB Atlas with Google Cloud Platform
 
+
   Server Based:
     Building a REST API: Express, Node.js web application framework
     Nodemon: for Automation Restarts of server
