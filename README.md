@@ -1,7 +1,7 @@
 # Advanced-Computer-Science
 Advanced Software Engineering Project
 
-This project is developed for Advanced software engineering course which encourage students to agile development and simulate real industry problems.
+This project is developed for course which encourage students to agile development and simulate real industry problems.
 
 ## Getting Started
 
