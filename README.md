@@ -65,7 +65,7 @@ npm start
 
 * **Ege Hoşgüngör** - *Full stack developer /Team Leader* - [Hsgngr](https://github.com/Hsgngr)
 
-See also the list of [None](https://github.com/your/project/contributors) who participated in this project.
+See also the list of [contributers](https://github.com/your/project/contributors) who participated in this project.
 
 
 ## Acknowledgments
