@@ -54,11 +54,10 @@ npm start
 
 ## Built With
 
-
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
 * [React Native](https://facebook.github.io/react-native/) -  Cross-Platform framework for mobile application
 * [Express Api](https://expressjs.com/en/api.html) - Building a REST API: Express, Node.js web application framework
 * [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) - Global cloud database service deploy with Google Cloud Platform
+* [Ngrok](https://ngrok.com) - Public URLs for exposing your local web server.
 
 
 ## Authors
