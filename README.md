@@ -8,59 +8,49 @@ This project is developed for Advanced software engineering course which encoura
 You can clone the repo and see one by one our milestones of our project.
 ```
 git clone https://github.com/Hsgngr/Advanced-Computer-Science
-cd Project
+cd Project-v3  //Example
 npm start
 ```
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+If you want to use android emulator, You should install Android Studio and set up a virtual device.
+If you are going to use it with your device, you need to install expo app to your physical devices.
 
 ```
-Give examples
+npm install expo-cli
 ```
 
 ### Installing
-
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
-
-```
-Give the example
-```
-
-And repeat
+The folders that you can run "npm start" in:
+  1)minimumDelivarable
+  2)Project-v3
+  3)task4
 
 ```
-until finished
+cd minimumDelivrable
+npm start
 ```
+To run the task4 there are more things you should do, since it needs a local server and ngrok also. You need 3 different cmd prompt
 
-End with an example of getting some data out of the system or using it for a little demo
+```
+cd track-server
+npm run dev
+```
+```
+ngrok http 3000
+```
+```
+npm start
+```
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+ Postman for testing post requests of custom api
+ Nodemon: for Automation Restarts of server
 
-### Break down into end to end tests
 
-Explain what these tests test and why
 
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
