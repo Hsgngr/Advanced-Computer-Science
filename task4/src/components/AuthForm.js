@@ -7,9 +7,9 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    return(
+    return (
         <>
-        <Spacer>
+            <Spacer>
                 <Text h4> {headerText} </Text>
             </Spacer>
             <Input
@@ -18,6 +18,7 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
                 onChangeText={setEmail}
                 autoCapitalize={"none"}
                 autoCorrect={false}
+                autoFocus={true} //If true, focuses the input on componentDidMount. The default value is false.
             />
             <Spacer/>
             <Input
@@ -36,7 +37,7 @@ const AuthForm = ({headerText, errorMessage, onSubmit, submitButtonText}) => {
     );
 };
 
-const styles= StyleSheet.create({
+const styles = StyleSheet.create({
     errorMessage: {
         fontSize: 16,
         color: 'red',
