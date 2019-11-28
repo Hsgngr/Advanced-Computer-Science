@@ -2,13 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b300790a-f555-4219-be7e-c9af52a06c50" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/task4.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project-v3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project-v3/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project-v3/src/screens/MapScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/../Project-v3/src/screens/MapScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/tracker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/tracker.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/AuthForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/AuthForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/screens/SigninScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/SigninScreen.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,8 +17,11 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
   </component>
   <component name="ProjectId" id="1UBDCX0z5PUbxBlq5M4A89CVcfL" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_ADD_EXTERNAL_FILES" value="true" />
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
@@ -50,7 +50,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1574820967653</updated>
-      <workItem from="1574820968966" duration="1732000" />
+      <workItem from="1574820968966" duration="20609000" />
     </task>
     <servers />
   </component>
@@ -67,5 +67,8 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
