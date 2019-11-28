@@ -11,7 +11,7 @@ const authReducer = (state, action) => {
             return {errorMessage: '', token: action.payload}; //Since we signup error message should go away. Restart your errorMessage variable.
 
         case 'clear_error_message':
-            return{...state, errorMessage:' '}
+            return {...state, errorMessage: ''};
         default:
             return state;
     }
@@ -19,11 +19,16 @@ const authReducer = (state, action) => {
 
 const tryLocalSignin = dispatch => async () => {
     const token = await AsyncStorage.getItem('token');
-    
+    if (token) {
+        dispatch({type: 'signin', payload: token});
+        navigate('mainFlow');
+    } else {
+        navigate('Signup');
+    }
 };
 
 const clearErrorMessage = dispatch => () => {
-  dispatch({type: 'clear_error_message'})
+    dispatch({type: 'clear_error_message'})
 };
 
 const signup = dispatch => {
@@ -66,6 +71,6 @@ const signout = dispatch => {
 
 export const {Provider, Context} = createDataContext(
     authReducer,
-    {signup, signin, signout, clearErrorMessage},
+    {signup, signin, signout, clearErrorMessage, tryLocalSignin},
     {token: null, errorMessage: ''}
 );
