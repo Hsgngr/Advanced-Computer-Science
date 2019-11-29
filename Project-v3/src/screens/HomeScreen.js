@@ -42,6 +42,12 @@ const HomeScreen = props => {
               title= "About Us"
               type="solid"
             />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('Testing')} 
+              title= "Test Cases"
+              type="solid"
+            />
           </View>
         </ImageBackground> 
       </View> 
