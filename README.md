@@ -1,5 +1,5 @@
 ## Advanced-Software-Engineering at University of Sussex - Group 1 TEAM project
-The purpose of this software is to collaborate with team members and classmates from an Advanced-Software-Enginnering module at the University of Sussex. All classmates have been tasked with the following deliverables and have contributed to the research, functionality, and deliverable of this project. 
+The purpose of this software is to collaborate with team members and classmates from an Advanced-Software-Enginnering module at the University of Sussex.
 
 Task 1. Each group should set up a Github or Bitbucket account to be used for the project. See here for details. Deadline: Monday, 21 October 2019, at 16:00.
 Task 2. Produce a simple Android and/or iPhone or cross-platform app. See here for details. Deadline: Friday, 25 October 2019, at 16:00.
@@ -77,11 +77,12 @@ npm start
 
 * **Ege Hoşgüngör** - *Full stack developer /Team Leader* - [Hsgngr](https://github.com/Hsgngr)
 * **Alhabal, Khalil** - *Full stack developer /Team Leader*
-* **Li, Bolan Eve** - *Full stack developer*
+* **Smith, Isaraporn** - *Testing/Backend developer*
 * **Seeley, Tiffany** - *Full stack developer*
-* **Shao, Nian** - *Full stack developer*
-* **Hughes, Alexis** - *Full stack developer*
-* **Smith, Isaraporn** - *Full stack developer*
+* **Li, Bolan Eve** - *Front end developer*
+* **Shao, Nian** - *Front end developer*
+
+* **Smith, Isaraporn** - *Testing/Backend developer*
 
 See also the list of [contributers](https://github.com/your/project/contributors) who participated in this project.
 
