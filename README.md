@@ -82,8 +82,6 @@ npm start
 * **Li, Bolan Eve** - *Front end developer*
 * **Shao, Nian** - *Front end developer*
 
-* **Smith, Isaraporn** - *Testing/Backend developer*
-
 See also the list of [contributers](https://github.com/your/project/contributors) who participated in this project.
 
 
