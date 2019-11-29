@@ -9,21 +9,13 @@ import FetchScreen from "./src/screens/FetchScreen";
 import MapScreen from "./src/screens/MapScreen";
 //import dataFetchingPost from  './src/components/dataFetchingPost';
 
-/* export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-} */
-
 const AppNavigator = createStackNavigator(
   {
     Home: HomeScreen,
     Credits: creditsScene,
     Navigation: GpsNavigation,
     FetchScreen: FetchScreen,
-      MapScreen: MapScreen,
+    MapScreen: MapScreen,
 
   },
   {
@@ -35,8 +27,8 @@ export default createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    flex:1,
+    backgroundColor: '#00CED1',
     alignItems: 'center',
     justifyContent: 'center',
   },

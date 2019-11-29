@@ -1,10 +1,10 @@
 import React, {Component, useState} from 'react';
-import {Platform, Text, View, StyleSheet, Button, ActivityIndicator} from 'react-native';
+import {Platform, Text, View, StyleSheet, ActivityIndicator} from 'react-native';
 import Constants from 'expo-constants';
 import * as Location from 'expo-location';
 import * as Permissions from 'expo-permissions';
 import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-
+import {Button} from 'react-native-elements';
 import type {Region} from 'react-native-maps';
 import postCodes from "../Api/postCodes";
 
@@ -16,9 +16,13 @@ type
 const UNIVERSITY_SUSSEX = {
     latitude: 50.860798412471716,
     longitude: -0.08990714542439898,
-    latitudeDelta: 0.02,
-    longitudeDelta: 0.02
+    latitudeDelta: 0.1,
+    longitudeDelta: 0.1
 
+}
+
+function Separator() {
+      return <View style={styles.separator}/>;
 }
 
 // const [results, setResults] = useState([])
@@ -66,10 +70,10 @@ export default class App extends Component <Props, State> {
             this.setState({location, loaded: true, errorMessage: null});
         }
     };
+
     _showMyLocation = (): void => this.setState({region: MY_LOCATION});
     _showUniversityOfSussex = (): void => this.setState({region: UNIVERSITY_SUSSEX});
-
-
+    
     render() {
         // check to see if we have loaded
         if (this.state.loaded) {
@@ -91,8 +95,8 @@ export default class App extends Component <Props, State> {
                 MY_LOCATION = {
                     latitude: this.state.location.coords.latitude,
                     longitude: this.state.location.coords.longitude,
-                    latitudeDelta: 0.01,
-                    longitudeDelta: 0.01
+                    latitudeDelta: 0.009,
+                    longitudeDelta: 0.009,
                 }
                 // if we have a location show it
                 return (
@@ -110,8 +114,17 @@ export default class App extends Component <Props, State> {
                             }} */
                         />
                         <View style={styles.buttonsContainer}>
-                            <Button title={'University of Sussex'} onPress={this._showUniversityOfSussex}/>
-                            <Button title={'My Location'} onPress={this._showMyLocation}/>
+                            <Button 
+                                title={'University of Sussex'}
+                                onPress={this._showUniversityOfSussex}
+                                type="solid"
+                            />
+                            <Separator/>
+                            <Button 
+                                title={'My Location'}
+                                onPress={this._showMyLocation}
+                                type="solid"
+                            />
                         </View>
                     </View>
                 );
@@ -129,26 +142,37 @@ export default class App extends Component <Props, State> {
 }
 
 const styles = StyleSheet.create({
-    container2: {flex: 1, backgroundColor: 'white'},
+    container2: {flex: 1, backgroundColor: '#00CED1'},
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
         paddingTop: Constants.statusBarHeight,
-        backgroundColor: 'white' //#8cf2ff
+        backgroundColor: '#00CED1'
     },
     paragraph: {
         margin: 24,
         fontSize: 24,
         textAlign: 'center',
-        backgroundColor: 'white'
+        backgroundColor: '#00CED1'
     },
-    mapViewContainer: {flex: 1},
+    mapViewContainer: {
+        flex: 1
+    },
     buttonsContainer: {
-        flex: 1 / 16,
         flexDirection: 'row',
         justifyContent: 'center',
-        paddingVertical: 16
+        paddingVertical: 5
+    },
+    btns: {
+        //margin: 50,
+        padding: 30,
+        //fontSize: 50,
+        alignSelf: 'center',
+        //flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
+    separator: {
+        marginVertical: 8,
     }
-
 });

@@ -1,37 +1,80 @@
-import React from 'react';
-import { Text, StyleSheet, View, Button, TouchableOpacity} from 'react-native';
+import * as React from 'react';
+import {Text, StyleSheet, View, TouchableOpacity, ImageBackground, SafeAreaView} from 'react-native';
+//import {Card} from 'react-native-paper';
+import {Button} from 'react-native-elements';
 
 const HomeScreen = props => {
+
+  function Separator() {
+      return <View style={styles.separator}/>;
+  }
+
   return (
-  <View>
-      <Text style={styles.text}>Welcome to the Good Place</Text>
-      <Button
-          onPress= {() => props.navigation.navigate('MapScreen')}
-          title= "Map Demo"
-      />
-      <Button
-          onPress= {() => props.navigation.navigate('FetchScreen')}
-          title= "Fetch Demo"
-      />
-      <Button 
-        onPress= {() => props.navigation.navigate('Navigation')} 
-        title= "Navigation" 
-        />
-        
-      <Button 
-        onPress= {() => props.navigation.navigate('Credits')} 
-        title= "About Us" 
-        />
-      
-      
-        
-  </View> 
+
+    <SafeAreaView style={styles.container}>
+      <View>
+        <ImageBackground style={styles.image} source={require('../../assets/Logo.png')}>
+          <Text style={styles.title}>
+            Group 4 Project
+          </Text>
+          <Separator/>
+          <View style={styles.btns}>
+            <Button
+              onPress= {() => props.navigation.navigate('MapScreen')}
+              title= "Map Demo"
+              type="solid"
+            />
+            <Separator/>
+            <Button
+                onPress= {() => props.navigation.navigate('FetchScreen')}
+                title= "Fetch Demo"
+                type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('Navigation')} 
+              title= "Navigation"
+              type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('Credits')} 
+              title= "About Us"
+              type="solid"
+            />
+          </View>
+        </ImageBackground> 
+      </View> 
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  text: {
-    fontSize: 25
+  container: {
+    flex:1,
+    backgroundColor: '#00CED1',
+  },
+  image: {
+    width: '100%',
+    height: '100%',
+  },
+  title: {
+    color: '#00008B',
+    fontSize: 25,
+    margin: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+  },
+  btns: {
+    //margin: 50,
+    padding: 30,
+    //fontSize: 50,
+    alignSelf: 'center',
+    //flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  separator: {
+    marginVertical: 8,
   }
 });
 
