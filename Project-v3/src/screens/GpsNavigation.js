@@ -37,12 +37,6 @@ export default class App extends Component {
                 latitude: 0,
                 longitude: 0,
             },
-            fingerPosition: {
-                latitude: 0,
-                longitude: 0,
-                latitudeDelta: 0,
-                longitudeDelta: 0,
-            }
         }
     }
 
@@ -52,6 +46,7 @@ export default class App extends Component {
         navigator.geolocation.getCurrentPosition((position) => {
             var lat = parseFloat(position.coords.latitude)
             var long = parseFloat(position.coords.longitude)
+
             var initialRegion = {
                 latitude: lat,
                 longitude: long,
@@ -61,7 +56,6 @@ export default class App extends Component {
 
             this.setState({initialPosition: initialRegion})
             this.setState({markerPosition: initialRegion})
-            this.setState({fingerPosition: initialRegion})
         },
         (error) => alert(JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
@@ -78,7 +72,6 @@ export default class App extends Component {
 
             this.setState({initialPosition: lastRegion})
             this.setState({markerPosition: lastRegion})
-            this.setState({fingerPosition: lastRegion})
         })
     }
 
@@ -86,17 +79,12 @@ export default class App extends Component {
         navigator.geolocation.clearWatch(this.watchID)
     }
 
-    onFingerChange(fingerPosition) {
-        this.setState({ fingerPosition});
-    }
-
     render(){
         return (
             <View style={styles.container}>
                 <MapView
                     style={styles.map}
-                    region={this.state.initialPosition}
-                    onFingerChange={fingerPosition => this.onFingerChange(fingerPosition)}>
+                    region={this.state.initialPosition}>
                     <MapView.Marker
                         coordinate={this.state.markerPosition}>
                         <View style={styles.radius}>
@@ -107,8 +95,8 @@ export default class App extends Component {
                 </MapView>
                 <View style={[styles.bubble, styles.latlng]}>
                   <Text style={styles.centeredText}>
-                    {this.state.fingerPosition.latitude.toPrecision(7)},
-                    {this.state.fingerPosition.longitude.toPrecision(7)},
+                    {this.state.initialPosition.latitude.toPrecision(7)},
+                    {this.state.initialPosition.longitude.toPrecision(7)},
                     Current Location
                   </Text>
                 </View>

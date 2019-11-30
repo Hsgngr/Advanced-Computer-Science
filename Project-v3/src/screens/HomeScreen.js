@@ -50,8 +50,8 @@ const HomeScreen = props => {
             />
             <Separator/>
             <Button 
-              onPress= {() => props.navigation.navigate('Tiffany')} 
-              title= "Tiffany"
+              onPress= {() => props.navigation.navigate('FingerTracking')} 
+              title= "FingerTracking"
               type="solid"
             />
           </View>
