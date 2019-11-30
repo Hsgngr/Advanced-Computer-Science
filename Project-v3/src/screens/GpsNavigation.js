@@ -1,178 +1,170 @@
-import React, {Component, useState} from 'react';
-import {Platform, Text, View, StyleSheet, ActivityIndicator} from 'react-native';
-import Constants from 'expo-constants';
-import * as Location from 'expo-location';
-import * as Permissions from 'expo-permissions';
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+import React, {Component} from 'react';
 import {Button} from 'react-native-elements';
-import type {Region} from 'react-native-maps';
-import postCodes from "../Api/postCodes";
+import {
+    Text, 
+    View, 
+    StyleSheet, 
+    AppRegistry,
+    Dimensions,
+    TouchableOpacity,
+} from 'react-native';
+import MapView, {
+  MAP_TYPES, 
+  ProviderPropType
+} from 'react-native-maps';
+//import Constants from 'expo-constants'
 
-type
-    Props = {};
-type
-    State = { region: ? Region, }
+const {width, height} = Dimensions.get('window')
+const SCREEN_WIDTH = width
+const SCREEN_HEIGHT = height
+const ASPECT_RATIO = width / height
+const LATTITUDE_DELTA = 0.01
+const LONGITUDE_DELTA =  LATTITUDE_DELTA * ASPECT_RATIO
 
-const UNIVERSITY_SUSSEX = {
-    latitude: 50.860798412471716,
-    longitude: -0.08990714542439898,
-    latitudeDelta: 0.1,
-    longitudeDelta: 0.1
+export default class App extends Component {
 
-}
+    constructor(props){
+        super(props)
 
-function Separator() {
-      return <View style={styles.separator}/>;
-}
-
-// const [results, setResults] = useState([])
-// const [errorMessage, setErrorMessage] = useState('');
-//
-// const sendData = async (userData) => {
-//     try {
-//         const response = await postCodes.get('/random/postcodes'); //As an example I am going to use random postcodes to 'GET'
-//         setResults(response.data.result);
-//         console.log({results});
-//     } catch (err) {
-//         setErrorMessage('Something went wrong');
-//     }
-// };
-// sendData('BN2 4ED');,
-
-export default class App extends Component <Props, State> {
-    constructor(props: Props) {
-        super(props);
-        this.state = {region: null};
+        this.state = {
+            initialPosition: {
+                latitude: 0,
+                longitude: 0,
+                latitudeDelta: 0,
+                longitudeDelta: 0,
+            },
+            markerPosition: {
+                latitude: 0,
+                longitude: 0,
+            },
+            fingerPosition: {
+                latitude: 0,
+                longitude: 0,
+                latitudeDelta: 0,
+                longitudeDelta: 0,
+            }
+        }
     }
 
+    watchID: ?number = null
 
     componentDidMount() {
-        if (Platform.OS === 'android' && !Constants.isDevice) {
-            this.setState({
-                errorMessage: 'Oops, this will not work on Sketch in an Android emulator. Try it on your device!',
-            });
-        } else {
-            this._getLocationAsync();
-        }
+        navigator.geolocation.getCurrentPosition((position) => {
+            var lat = parseFloat(position.coords.latitude)
+            var long = parseFloat(position.coords.longitude)
+            var initialRegion = {
+                latitude: lat,
+                longitude: long,
+                latitudeDelta: LATTITUDE_DELTA,
+                longitudeDelta: LONGITUDE_DELTA,
+            }
+
+            this.setState({initialPosition: initialRegion})
+            this.setState({markerPosition: initialRegion})
+            this.setState({fingerPosition: initialRegion})
+        },
+        (error) => alert(JSON.stringify(error)),
+        {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+
+        this.watchID = navigator.geolocation.watchPosition((position) => {
+            var lat = parseFloat(position.coords.latitude)
+            var long = parseFloat(position.coords.longitude)
+            var lastRegion = {
+                latitude: lat,
+                longitude: long,
+                longitudeDelta: LONGITUDE_DELTA,
+                latitudeDelta: LATTITUDE_DELTA,
+            }
+
+            this.setState({initialPosition: lastRegion})
+            this.setState({markerPosition: lastRegion})
+            this.setState({fingerPosition: lastRegion})
+        })
     }
 
-    _getLocationAsync = async () => {
-        let {status} = await Permissions.askAsync(Permissions.LOCATION);
-        if (status !== 'granted') {
-            this.setState({
-                errorMessage: 'Permission to access location was denied',
-                loaded: true
-            });
-        } else {
-            // only check the location if it has been granted
-            // you also may want to wrap this in a try/catch as async functions can throw
-            let location = await Location.getCurrentPositionAsync({enableHighAccuracy: true});
-            this.setState({location, loaded: true, errorMessage: null});
-        }
-    };
+    componentWillUnmount() {
+        navigator.geolocation.clearWatch(this.watchID)
+    }
 
-    _showMyLocation = (): void => this.setState({region: MY_LOCATION});
-    _showUniversityOfSussex = (): void => this.setState({region: UNIVERSITY_SUSSEX});
-    
-    render() {
-        // check to see if we have loaded
-        if (this.state.loaded) {
-            // if we have an error message show it
-            if (this.state.errorMessage) {
-                return (
-                    <View style={styles.container}>
-                        <Text>{JSON.stringify(this.state.errorMessage)}</Text>
-                    </View>
-                );
-            } else if (this.state.location) {
+    onFingerChange(fingerPosition) {
+        this.setState({ fingerPosition});
+    }
 
-                function sendDummyData() {
-                    //console.log('I am sending the user data ');
-                }
-
-                let timerID = setInterval(sendDummyData, 1000); //
-
-                MY_LOCATION = {
-                    latitude: this.state.location.coords.latitude,
-                    longitude: this.state.location.coords.longitude,
-                    latitudeDelta: 0.009,
-                    longitudeDelta: 0.009,
-                }
-                // if we have a location show it
-                return (
-                    <View style={styles.container2}>
-                        <MapView
-                            //style={{ flex: 1 }}
-                            style={styles.mapViewContainer}
-                            provider={PROVIDER_GOOGLE}
-                            region={this.state.region} // TODO: This should be fixed -> It should show myLocation at start.
-                            /* region={{
-                              latitude: this.state.location.coords.latitude,
-                              longitude: this.state.location.coords.longitude,
-                              latitudeDelta: 0.05,
-                              longitudeDelta: 0.05
-                            }} */
-                        />
-                        <View style={styles.buttonsContainer}>
-                            <Button 
-                                title={'University of Sussex'}
-                                onPress={this._showUniversityOfSussex}
-                                type="solid"
-                            />
-                            <Separator/>
-                            <Button 
-                                title={'My Location'}
-                                onPress={this._showMyLocation}
-                                type="solid"
-                            />
+    render(){
+        return (
+            <View style={styles.container}>
+                <MapView
+                    style={styles.map}
+                    region={this.state.initialPosition}
+                    onFingerChange={fingerPosition => this.onFingerChange(fingerPosition)}>
+                    <MapView.Marker
+                        coordinate={this.state.markerPosition}>
+                        <View style={styles.radius}>
+                            <View style={styles.marker}>
+                            </View>
                         </View>
-                    </View>
-                );
-            }
-        } else {
-            // if we haven't loaded show a waiting placeholder
-            return (
-                <View style={styles.container}>
-                    <ActivityIndicator size="large" color="#0000ff"/>
-                    <Text style={styles.paragraph}>Loading...</Text>
+                    </MapView.Marker>
+                </MapView>
+                <View style={[styles.bubble, styles.latlng]}>
+                  <Text style={styles.centeredText}>
+                    {this.state.fingerPosition.latitude.toPrecision(7)},
+                    {this.state.fingerPosition.longitude.toPrecision(7)},
+                    Current Location
+                  </Text>
                 </View>
-            );
-        }
+            </View>
+        );
     }
 }
 
 const styles = StyleSheet.create({
-    container2: {flex: 1, backgroundColor: '#00CED1'},
+    radius: {
+        height: 50,
+        width: 50,
+        borderRadius: 50 / 2,
+        overflow: 'hidden',
+        backgroundColor: 'rgba(0,122,255,1.0)',
+        borderWidth: 1,
+        borderColor: 'rgba(0,112, 255,1.0)',
+        alignItems: 'center',
+        justifyContent: 'center',
+    },
+    marker: {
+        height: 20,
+        width: 20,
+        borderWidth: 3,
+        borderColor: 'white',
+        borderRadius: 20 /2,
+        overflow: 'hidden',
+        backgroundColor: '#007AFF',
+    },
     container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center',
-        paddingTop: Constants.statusBarHeight,
-        backgroundColor: '#00CED1'
+        backgroundColor: '#F5FCFF',
     },
-    paragraph: {
-        margin: 24,
-        fontSize: 24,
-        textAlign: 'center',
-        backgroundColor: '#00CED1'
+    map: {
+        left:0,
+        right:0,
+        top:0,
+        bottom: 0,
+        position: 'absolute',
     },
-    mapViewContainer: {
-        flex: 1
-    },
-    buttonsContainer: {
+    btn: {
         flexDirection: 'row',
-        justifyContent: 'center',
-        paddingVertical: 5
     },
-    btns: {
-        //margin: 50,
-        padding: 30,
-        //fontSize: 50,
-        alignSelf: 'center',
-        //flexDirection: 'row',
-        justifyContent: 'space-between',
+    bubble: {
+        backgroundColor: 'rgba(255,255,255,0.7)',
+        paddingHorizontal: 18,
+        paddingVertical: 12,
+        borderRadius: 20,
     },
-    separator: {
-        marginVertical: 8,
-    }
+    latlng: {
+        width: 200,
+        alignItems: 'stretch',
+    },
+    centeredText: { 
+        textAlign: 'center' 
+    },
 });
