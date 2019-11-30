@@ -4,10 +4,10 @@ import { FlatList } from 'react-native-gesture-handler';
 
 const credits = () => {
     const members=[
-        {name: 'Khalil Alhabal'},
-        {name: 'Tiffany Lynn Seeley'},
         {name: 'Ege Hoşgüngör'},
+        {name: 'Khalil Alhabal'},
         {name: 'Nian Shao'},
+        {name: 'Tiffany Lynn Seeley'},
         {name: 'Eve Li Bolan'},
         {name: 'Issa Smith'},
     ];
