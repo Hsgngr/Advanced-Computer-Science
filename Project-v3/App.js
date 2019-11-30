@@ -7,15 +7,9 @@ import creditsScene from './src/screens/creditsScene';
 import GpsNavigation from './src/screens/GpsNavigation';
 import FetchScreen from "./src/screens/FetchScreen";
 import MapScreen from "./src/screens/MapScreen";
+import Testing from "./src/screens/Testing";
+import Tiffany from "./src/screens/Tiffany";
 //import dataFetchingPost from  './src/components/dataFetchingPost';
-
-/* export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-} */
 
 const AppNavigator = createStackNavigator(
   {
@@ -23,8 +17,9 @@ const AppNavigator = createStackNavigator(
     Credits: creditsScene,
     Navigation: GpsNavigation,
     FetchScreen: FetchScreen,
-      MapScreen: MapScreen,
-
+    MapScreen: MapScreen,
+    Testing: Testing,
+    Tiffany: Tiffany,
   },
   {
     initialRouteName: 'Home',
@@ -35,8 +30,8 @@ export default createAppContainer(AppNavigator);
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    backgroundColor: '#fff',
+    flex:1,
+    backgroundColor: '#00CED1',
     alignItems: 'center',
     justifyContent: 'center',
   },

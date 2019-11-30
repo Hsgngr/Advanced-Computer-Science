@@ -1,6 +1,11 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import {StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-native';
+import {StyleSheet,
+    View,
+    Dimensions,
+    ActivityIndicator,
+    Text
+} from 'react-native';
 
 export default class App extends React.Component {
 

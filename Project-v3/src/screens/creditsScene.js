@@ -9,26 +9,42 @@ const credits = () => {
         {name: 'Ege Hoşgüngör'},
         {name: 'Nian Shao'},
         {name: 'Eve Li Bolan'},
-        {name: 'Alexis Hughes'},
         {name: 'Issa Smith'},
-        {name: 'Jeong Minoh'}
-        
     ];
     return (
-    <FlatList 
-        keyExtractor={(members) => members.name}
-        data = {members}
-        renderItem ={({item}) => {
-            return <Text style= {styles.textStyle}>{item.name}</Text>;            
-        }}
-    />
+    <View style={styles.container}>
+        <Text style={styles.title}>
+            Credits Screen
+        </Text>
+        <FlatList 
+            keyExtractor={(members) => members.name}
+            data = {members}
+            renderItem ={({item}) => {
+                return <Text style= {styles.names}>{item.name}</Text>;            
+            }}
+        />
+    </View> 
     );
 }; 
 
 const styles = StyleSheet.create({
-    textStyle:{
-        fontSize:15,
-        marginVertical: 10
+    container: {
+        flex:1,
+        backgroundColor: '#00CED1',
+    },
+    title: {
+        color: '#00008B',
+        fontSize: 25,
+        margin: 24,
+        fontWeight: 'bold',
+        textAlign: 'center',
+  },
+    names:{
+        fontSize: 25,
+        color: '#ffffff',
+        padding: 10,
+        margin: 5,
+        textAlign: 'center',
     }
 });
 
