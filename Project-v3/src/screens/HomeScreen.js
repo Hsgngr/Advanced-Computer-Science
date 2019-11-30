@@ -33,7 +33,7 @@ const HomeScreen = props => {
             <Separator/>
             <Button 
               onPress= {() => props.navigation.navigate('Navigation')} 
-              title= "Navigation"
+              title= "UK Housing Prices Map"
               type="solid"
             />
             <Separator/>
@@ -46,6 +46,12 @@ const HomeScreen = props => {
             <Button 
               onPress= {() => props.navigation.navigate('Testing')} 
               title= "Test Cases"
+              type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('Tiffany')} 
+              title= "Tiffany"
               type="solid"
             />
           </View>
