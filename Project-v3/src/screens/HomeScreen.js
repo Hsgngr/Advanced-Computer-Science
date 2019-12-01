@@ -54,6 +54,12 @@ const HomeScreen = props => {
               title= "FingerTracking"
               type="solid"
             />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('MarkerTesting')} 
+              title= "MarkerTesting"
+              type="solid"
+            />
           </View>
         </ImageBackground> 
       </View> 

@@ -9,6 +9,7 @@ import FetchScreen from "./src/screens/FetchScreen";
 import MapScreen from "./src/screens/MapScreen";
 import Testing from "./src/screens/Testing";
 import FingerTracking from "./src/screens/FingerTracking";
+import MarkerTesting from "./src/screens/MarkerTesting";
 //import dataFetchingPost from  './src/components/dataFetchingPost';
 
 const AppNavigator = createStackNavigator(
@@ -20,6 +21,7 @@ const AppNavigator = createStackNavigator(
     MapScreen: MapScreen,
     Testing: Testing,
     FingerTracking: FingerTracking,
+    MarkerTesting: MarkerTesting,
   },
   {
     initialRouteName: 'Home',
