@@ -18,7 +18,6 @@ const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
 
-//get a random color for each user clicked marker
 function randomColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
@@ -36,7 +35,31 @@ class DefaultMarkers extends React.Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
-      markers: [], //each marker stored as elem in array
+      markers: [
+      ],
+      dummyMarkers: [
+        {
+          coordinate: {
+            latitude: 50.8169,
+            longitude: -0.1367,
+          },
+          title: "btn pier",
+        },
+        {
+          coordinate: {
+            latitude: 50.8289,
+            longitude: -0.1410,
+          },
+          title: "btn station",
+        },
+        {
+          coordinate: {
+            latitude: 50.8351,
+            longitude: -0.1710,
+          },
+          title: "hove station",
+        },
+      ],
     };
   }
 
@@ -46,7 +69,7 @@ class DefaultMarkers extends React.Component {
         ...this.state.markers,
         {
           coordinate: e.nativeEvent.coordinate,
-          key: id++, //possibly put if statement, eg if more than 20, then cap markers
+          key: id++,
           color: randomColor(),
         },
       ],
@@ -56,6 +79,7 @@ class DefaultMarkers extends React.Component {
   render() {
     return (
       <View style={styles.container}>
+        
         <MapView
           provider={this.props.provider}
           style={styles.map}
@@ -69,15 +93,26 @@ class DefaultMarkers extends React.Component {
               pinColor={marker.color}
             />
           ))}
+          {this.state.dummyMarkers.map(someMarker => (
+            <Marker
+              key={someMarker.key}
+              coordinate={someMarker.coordinate}
+              pinColor={someMarker.color}
+            //>
+              //<Text>{someMarker.title}</Text>
+            />
+          ))}
         </MapView>
+        
         <View style={styles.buttonContainer}>
           <TouchableOpacity
             onPress={() => this.setState({ markers: [] })}
             style={styles.bubble}
           >
-            <Text>Tap to create a marker of random color</Text>
+            <Text>tap map to insert marker</Text>
           </TouchableOpacity>
         </View>
+
       </View>
     );
   }
