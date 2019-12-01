@@ -18,6 +18,7 @@ const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
 
+//get a random color for each user clicked marker
 function randomColor() {
   return `#${Math.floor(Math.random() * 16777215)
     .toString(16)
@@ -35,7 +36,7 @@ class DefaultMarkers extends React.Component {
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
-      markers: [],
+      markers: [], //each marker stored as elem in array
     };
   }
 
@@ -45,7 +46,7 @@ class DefaultMarkers extends React.Component {
         ...this.state.markers,
         {
           coordinate: e.nativeEvent.coordinate,
-          key: id++,
+          key: id++, //possibly put if statement, eg if more than 20, then cap markers
           color: randomColor(),
         },
       ],
