@@ -1,16 +1,16 @@
 import React, {Component} from 'react';
 import {Button} from 'react-native-elements';
 import {
-    Text, 
-    View, 
-    StyleSheet, 
+    Text,
+    View,
+    StyleSheet,
     AppRegistry,
     Dimensions,
     TouchableOpacity,
 } from 'react-native';
 import MapView, {
-  MAP_TYPES, 
-  ProviderPropType
+    MAP_TYPES,
+    ProviderPropType
 } from 'react-native-maps';
 //import Constants from 'expo-constants'
 
@@ -19,11 +19,11 @@ const SCREEN_WIDTH = width
 const SCREEN_HEIGHT = height
 const ASPECT_RATIO = width / height
 const LATTITUDE_DELTA = 0.01
-const LONGITUDE_DELTA =  LATTITUDE_DELTA * ASPECT_RATIO
+const LONGITUDE_DELTA = LATTITUDE_DELTA * ASPECT_RATIO
 
 export default class App extends Component {
 
-    constructor(props){
+    constructor(props) {
         super(props)
 
         this.state = {
@@ -44,6 +44,7 @@ export default class App extends Component {
 
     componentDidMount() {
         navigator.geolocation.getCurrentPosition((position) => {
+<<<<<<< HEAD
             var lat = parseFloat(position.coords.latitude)
             var long = parseFloat(position.coords.longitude)
 
@@ -59,6 +60,23 @@ export default class App extends Component {
         },
         (error) => alert(JSON.stringify(error)),
         {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+=======
+                var lat = parseFloat(position.coords.latitude)
+                var long = parseFloat(position.coords.longitude)
+                var initialRegion = {
+                    latitude: lat,
+                    longitude: long,
+                    latitudeDelta: LATTITUDE_DELTA,
+                    longitudeDelta: LONGITUDE_DELTA,
+                }
+
+                this.setState({initialPosition: initialRegion})
+                this.setState({markerPosition: initialRegion})
+                this.setState({fingerPosition: initialRegion})
+            },
+            (error) => alert(JSON.stringify(error)),
+            {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+>>>>>>> f5ad870ccf1763f589e84584d54a230fb8e0e1d9
 
         this.watchID = navigator.geolocation.watchPosition((position) => {
             var lat = parseFloat(position.coords.latitude)
@@ -79,7 +97,15 @@ export default class App extends Component {
         navigator.geolocation.clearWatch(this.watchID)
     }
 
+<<<<<<< HEAD
     render(){
+=======
+    onFingerChange(fingerPosition) {
+        this.setState({fingerPosition});
+    }
+
+    render() {
+>>>>>>> f5ad870ccf1763f589e84584d54a230fb8e0e1d9
         return (
             <View style={styles.container}>
                 <MapView
@@ -94,11 +120,19 @@ export default class App extends Component {
                     </MapView.Marker>
                 </MapView>
                 <View style={[styles.bubble, styles.latlng]}>
+<<<<<<< HEAD
                   <Text style={styles.centeredText}>
                     {this.state.initialPosition.latitude.toPrecision(7)},
                     {this.state.initialPosition.longitude.toPrecision(7)},
                     Current Location
                   </Text>
+=======
+                    <Text style={styles.centeredText}>
+                        {this.state.fingerPosition.latitude.toPrecision(7)},
+                        {this.state.fingerPosition.longitude.toPrecision(7)},
+                        Current Location
+                    </Text>
+>>>>>>> f5ad870ccf1763f589e84584d54a230fb8e0e1d9
                 </View>
             </View>
         );
@@ -122,7 +156,7 @@ const styles = StyleSheet.create({
         width: 20,
         borderWidth: 3,
         borderColor: 'white',
-        borderRadius: 20 /2,
+        borderRadius: 20 / 2,
         overflow: 'hidden',
         backgroundColor: '#007AFF',
     },
@@ -133,9 +167,9 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF',
     },
     map: {
-        left:0,
-        right:0,
-        top:0,
+        left: 0,
+        right: 0,
+        top: 0,
         bottom: 0,
         position: 'absolute',
     },
@@ -152,7 +186,7 @@ const styles = StyleSheet.create({
         width: 200,
         alignItems: 'stretch',
     },
-    centeredText: { 
-        textAlign: 'center' 
+    centeredText: {
+        textAlign: 'center'
     },
 });
