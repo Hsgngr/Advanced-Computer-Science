@@ -1,6 +1,7 @@
 import React from 'react';
 import MapView from 'react-native-maps';
-import {StyleSheet,
+import {
+    StyleSheet,
     View,
     Dimensions,
     ActivityIndicator,
@@ -18,15 +19,18 @@ export default class App extends React.Component {
             latitudeDelta: 0.04,
         }
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.setState({mapLoaded: true});
     }
+
     onRegionChangeComplete = (region) => {
         this.setState({region});
-       console.log(region);
+        console.log(region);
     }
+
     render() {
-        if(!this.state.mapLoaded) {
+        if (!this.state.mapLoaded) {
             return (
                 <View style={styles.container}>
                     <ActivityIndicator size="large" color="#0000ff"/>
