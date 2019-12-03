@@ -2,22 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="b300790a-f555-4219-be7e-c9af52a06c50" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/Map.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/context/LocationContext.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../track-server/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../track-server/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../track-server/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../track-server/.idea/track-server.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../track-server/.idea/vcs.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Project-v3/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../Project-v3/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../track-server/src/models/PointData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/tracker.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/tracker.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/AccountScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/AccountScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/MapScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/MapScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/screens/TrackCreateScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/screens/TrackCreateScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../track-server/src/routes/trackRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../track-server/src/routes/trackRoutes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../track-server/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../track-server/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" beforeDir="false" afterPath="$PROJECT_DIR$/../track-server/src/routes/locationRoutes.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -63,7 +51,7 @@
       <option name="presentableId" value="Default" />
       <updated>1574820967653</updated>
       <workItem from="1574820968966" duration="30211000" />
-      <workItem from="1575330788478" duration="6656000" />
+      <workItem from="1575330788478" duration="7575000" />
     </task>
     <servers />
   </component>
