@@ -9,6 +9,9 @@ import {
 import Slider from "react-native-slider";
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 
+//this is from ege code - returns error when app is loaded (had to comment out)
+//import {Context as LocationContext} from "../context/LocationContext";
+
 //set the coordinates to BTN initally - should change this to user current location eventually
 const { width, height } = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
