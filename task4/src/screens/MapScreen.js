@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useContext} from 'react';
 import MapView from 'react-native-maps';
 import {StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-native';
 
-export default class App extends React.Component {
+import {Context as LocationContext} from "../context/LocationContext";
 
+
+export default class App extends React.Component {
     state = {
         mapLoaded: false,
         region: {
@@ -13,16 +15,21 @@ export default class App extends React.Component {
             latitudeDelta: 0.04,
         }
     }
-    componentDidMount(){
+
+    componentDidMount() {
         this.setState({mapLoaded: true});
     }
+
     onRegionChangeComplete = (region) => {
         this.setState({region});
         console.log(region);
+        
         //Make the fetch request here! Post your location and get some points from Database.
     }
+
     render() {
-        if(!this.state.mapLoaded) {
+        const markers = [];
+        if (!this.state.mapLoaded) {
             return (
                 <View style={styles.container}>
                     <ActivityIndicator size="large" color="#0000ff"/>
@@ -36,7 +43,14 @@ export default class App extends React.Component {
                     region={this.state.region}
                     style={styles.mapStyle}
                     onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
-                />
+
+                >
+                    {markers.map(markers => (
+                        <MapView.Marker
+                            coordinate={{'latitude': markers.Latitude, 'longitude': markers.Longitude}}
+                        />
+                    ))}
+                </MapView>
             </View>
         );
     }
