@@ -9,7 +9,7 @@ const router = express.Router();
 router.use(requireAuth); //Thats going to ensure that all the different request handlers that we attach to this router inside this file require the user to be signed in.
 
 router.get('/tracks', async (req, res) => {
- const tracks = await Track.find( {userId: req.user._id });
+ const tracks = await Track.find(); //Find all of them.
 
  res.send(tracks);
 });

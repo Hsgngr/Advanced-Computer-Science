@@ -2,7 +2,6 @@ import React from 'react';
 import {createAppContainer, createSwitchNavigator} from 'react-navigation';
 import {createStackNavigator} from 'react-navigation-stack';
 import {createBottomTabNavigator} from 'react-navigation-tabs';
-
 import AccountScreen from './src/screens/AccountScreen';
 import MapScreen from './src/screens/MapScreen';
 import SigninScreen from "./src/screens/SigninScreen";
@@ -40,6 +39,11 @@ export default createAppContainer(AppNavigator);
 
 //TS: had to comment out below logic; unable to get in app
 /*const switchNavigator = createSwitchNavigator({
+
+import {Provider as LocationProvider} from './src/context/LocationContext';
+
+const switchNavigator = createSwitchNavigator({
+
     ResolveAuth: ResolveAuthScreen,
     loginFlow: createStackNavigator({
         Signup: SignupScreen,
@@ -61,9 +65,13 @@ const App = createAppContainer(switchNavigator);
 
 export default () => {
     return (
-        <AuthProvider>
-            <App ref={(navigator) => {setNavigator(navigator)}}/>
-        </AuthProvider>
+        <LocationProvider>
+            <AuthProvider>
+                <App ref={(navigator) => {
+                    setNavigator(navigator)
+                }}/>
+            </AuthProvider>
+        </LocationProvider>
     );
 };
 */
