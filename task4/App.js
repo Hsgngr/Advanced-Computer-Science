@@ -13,7 +13,33 @@ import TrackListScreen from "./src/screens/TrackListScreen";
 import {Provider as AuthProvider} from "./src/context/AuthContext";
 import {setNavigator} from "./src/navigationRef";
 import ResolveAuthScreen from "./src/screens/ResolveAuthScreen";
-const switchNavigator = createSwitchNavigator({
+
+//tiff added screens below
+import HomeScreen from './src/screens/HomeScreen';
+import FingerTracking from './src/screens/FingerTracking';
+import CurrentLocation from './src/screens/CurrentLocation';
+import TestCases from './src/screens/TestCases';
+
+//TS: below logic pasted from 'Project-v3' app.js file
+const AppNavigator = createStackNavigator(
+  {
+    Home: HomeScreen,
+    SignupScreen: SignupScreen,
+    SigninScreen: SigninScreen,
+    MapScreen: MapScreen,
+    FingerTracking: FingerTracking,
+    CurrentLocation: CurrentLocation,
+    TestCases: TestCases,
+  },
+  {
+    initialRouteName: 'Home',
+  }
+);
+
+export default createAppContainer(AppNavigator);
+
+//TS: had to comment out below logic; unable to get in app
+/*const switchNavigator = createSwitchNavigator({
     ResolveAuth: ResolveAuthScreen,
     loginFlow: createStackNavigator({
         Signup: SignupScreen,
@@ -40,3 +66,4 @@ export default () => {
         </AuthProvider>
     );
 };
+*/
