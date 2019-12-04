@@ -7,11 +7,10 @@ const pointData = mongoose.model('PointData');
 
 const router = express.Router();
 
-router.use(requireAuth); //Thats going to ensure that all the different request handlers that we attach to this router inside this file require the user to be signed in.
+//router.use(requireAuth); //Thats going to ensure that all the different request handlers that we attach to this router inside this file require the user to be signed in.
 
 router.get('/locationData', async (req, res) => {
- const userData = await locationData.find({userId: req.user._id});
-
+    const userData = await locationData.find({userId: req.user._id});
 
  res.send(userData);
 });
@@ -53,6 +52,11 @@ router.post('/locationData2', async (req, res) => {
         res.status(422).send({error: err.message})
     }
 
+});
+
+router.get('/locationData2', async (req, res) => {
+    const houseData = await pointData.find(); //Find all of them.
+    res.send(houseData);
 });
 
 module.exports = router;

@@ -4,7 +4,6 @@ import {StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-nativ
 
 import {Context as LocationContext} from "../context/LocationContext";
 
-
 export default class App extends React.Component {
     state = {
         mapLoaded: false,
@@ -22,8 +21,7 @@ export default class App extends React.Component {
 
     onRegionChangeComplete = (region) => {
         this.setState({region});
-        console.log(region);
-        
+       // console.log(region);
         //Make the fetch request here! Post your location and get some points from Database.
     }
 
