@@ -87,7 +87,7 @@ react-native-elements
 * **Ege Hoşgüngör** - *Full stack developer /Team Leader* - [Hsgngr](https://github.com/Hsgngr)
 * **Alhabal, Khalil** - *Full stack developer /Team Leader*
 * **Smith, Isaraporn** - *Testing/Backend developer*
-* **Seeley, Tiffany** - *Full stack developer* [tiffsea](https://github.com/tiffsea)
+* **Seeley, Tiffany** - *Full stack developer* - [tiffsea](https://github.com/tiffsea)
 * **Li, Bolan Eve** - *Front end developer*
 * **Shao, Nian** - *Front end developer*
 
