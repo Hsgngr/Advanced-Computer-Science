@@ -4,7 +4,7 @@ import {
     Text, 
     View, 
     StyleSheet, 
-    AppRegistry,
+    //AppRegistry,
     Dimensions,
     TouchableOpacity,
 } from 'react-native';

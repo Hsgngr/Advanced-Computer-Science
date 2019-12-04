@@ -7,12 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Slider from "react-native-slider";
-import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+import MapView, { Marker, ProviderPropType, MAP_TYPES } from 'react-native-maps';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE = 50.82360;
-const LONGITUDE = -0.13836;
+const SCREEN_WIDTH = width
+const SCREEN_HEIGHT = height
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
@@ -30,19 +30,13 @@ function heatColor() {
     .padStart(6, 0)}`;
 }
 
-class DataMarkers extends React.Component {
+class CombinedMaps extends React.Component {
   
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isLoading: true, //prob delete since we don't use activity indictator atm
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      },
       //initialise empty array to eventually hold coords from user map-clicks
       fingerMarkers: [
       ],
@@ -51,12 +45,56 @@ class DataMarkers extends React.Component {
       filteredMarkers: [
       ],
       sliderValue: 0,
+      initialPosition: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0,
+      },
+      myPosition: { 
+        latitude: 0,
+        longitude: 0,
+      },
     };
   }
+
+  watchID: ?number = null
 
   //when data is loaded from gist, set state array vars with data
   //same code from fetch project-v3
   componentDidMount() {
+    
+    navigator.geolocation.getCurrentPosition((position) => {
+      var lat = parseFloat(position.coords.latitude)
+      var long = parseFloat(position.coords.longitude)
+
+      var initialRegion = {
+        latitude: lat,
+        longitude: long,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      }
+
+      this.setState({initialPosition: initialRegion})
+      this.setState({myPosition: initialRegion})
+    },
+
+    (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+        var lat = parseFloat(position.coords.latitude)
+        var long = parseFloat(position.coords.longitude)
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          longitudeDelta: LONGITUDE_DELTA,
+          latitudeDelta: LATITUDE_DELTA,
+        }
+        this.setState({initialPosition: lastRegion})
+        this.setState({myPosition: lastRegion})
+      })
+
     return fetch('https://gist.githubusercontent.com/tiffsea/622ed936223af5a987f7a018394cb02c/raw/72360909ad6c55f43669433bfd3de020a8afbc6b/UK_DATA.json')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -74,6 +112,10 @@ class DataMarkers extends React.Component {
       .catch((error) => {
       console.error(error);
     });
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID)
   }
 
   //when user clicks map, set finger coords to markers[]; give key id of +1
@@ -127,7 +169,8 @@ class DataMarkers extends React.Component {
         <MapView
           provider={this.props.provider}
           style={styles.map}
-          initialRegion={this.state.region}
+          region={this.state.initialPosition}
+          //initialRegion={this.state.region}
           onPress={e => this.onMapPress(e)}
         >
           {this.state.fingerMarkers.map(marker => (
@@ -147,7 +190,13 @@ class DataMarkers extends React.Component {
               </View>
             </Marker>
           ))}
-        </MapView>
+            <Marker
+              coordinate={this.state.myPosition}>
+              <View style={styles.radius}>
+                <View style={styles.marker}></View>
+              </View>
+            </Marker>
+         </MapView>
         
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -171,12 +220,22 @@ class DataMarkers extends React.Component {
             step={1000} //gets the increment size
             //onSlidingComplete={() => this.updateMarkers()} //{() => this.setState({priceMarkers:[]})}
           />
+          
           <TouchableOpacity
             style={styles.bubble}
             //onPress={() => this.updateMarkers()}
           >
             <Text>Price: {this.state.sliderValue}</Text>
           </TouchableOpacity>
+
+          <View style={[styles.bubble, styles.latlng]}>
+            <Text style={styles.centeredText}>
+              {this.state.initialPosition.latitude.toPrecision(7)},
+              {this.state.initialPosition.longitude.toPrecision(7)},
+              Current Location
+            </Text>
+          </View>
+
         </View>
 
       </View>
@@ -184,7 +243,7 @@ class DataMarkers extends React.Component {
   }
 }
 
-DataMarkers.propTypes = {
+CombinedMaps.propTypes = {
   provider: ProviderPropType,
 };
 
@@ -193,6 +252,7 @@ const styles = StyleSheet.create({
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    flex:1,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -232,7 +292,30 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "stretch",
     justifyContent: "center"
-  }
+  },
+  centeredText: { 
+    textAlign: 'center' 
+  },
+  marker: {
+    height: 10,
+    width: 10,
+    borderWidth: 3,
+    borderColor: 'white',
+    borderRadius: 20/2,
+    overflow: 'hidden',
+    backgroundColor: '#007AFF',
+  },
+  radius: {
+    height: 30,
+    width: 30,
+    borderRadius: 50 / 2,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(0,122,255,1.0)',
+    borderWidth: 1,
+    borderColor: 'rgba(0,112, 255,1.0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-export default DataMarkers;
+export default CombinedMaps;

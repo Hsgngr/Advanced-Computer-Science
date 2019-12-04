@@ -18,6 +18,7 @@ import HomeScreen from './src/screens/HomeScreen';
 import FingerTracking from './src/screens/FingerTracking';
 import CurrentLocation from './src/screens/CurrentLocation';
 import TestCases from './src/screens/TestCases';
+import CombinedMaps from './src/screens/CombinedMaps';
 
 //TS: below logic pasted from 'Project-v3' app.js file
 const AppNavigator = createStackNavigator(
@@ -29,6 +30,7 @@ const AppNavigator = createStackNavigator(
     FingerTracking: FingerTracking,
     CurrentLocation: CurrentLocation,
     TestCases: TestCases,
+    CombinedMaps: CombinedMaps,
   },
   {
     initialRouteName: 'Home',
