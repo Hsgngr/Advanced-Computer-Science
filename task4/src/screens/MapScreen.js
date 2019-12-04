@@ -8,18 +8,19 @@ import {
 } from 'react-native';
 import Slider from "react-native-slider";
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+//added below import instead of using const require
+import UK_DATA from '../data/UK_DATA.json';
 
-//this is from ege code - returns error when app is loaded (had to comment out)
-//import {Context as LocationContext} from "../context/LocationContext";
-
-//set the coordinates to BTN initally - should change this to user current location eventually
 const { width, height } = Dimensions.get('window');
+//changed from this to Data directory below
+//also switched to using import statement instead - test out!
+//const UK_DATA = require('../data/UK_DATA.json';
 const ASPECT_RATIO = width / height;
 const LATITUDE = 50.82360;
 const LONGITUDE = -0.13836;
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
-let id = 0; //for random markers
+let id = 0;
 
 function randomColor() {
   return `#${Math.floor(Math.random() * 16777215)
@@ -29,30 +30,26 @@ function randomColor() {
 
 //testing code below; not functional atm
 function heatColor() {
-  //if price is at x limit, return color 
+  return `#${Math.floor(Math.random() * 16777215)
+    .toString(16)
+    .padStart(6, 0)}`;
 }
 
 class DataMarkers extends React.Component {
   
   constructor(props) {
-    
     super(props);
 
     this.state = {
-      //region updated frequently with map markers
       region: {
         latitude: LATITUDE,
         longitude: LONGITUDE,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
-      //initialise marker array with blank values initially
-      //we will populate this array when use clicks map - see onMapPress() function
       markers: [
       ],
-      //dummy array used as playground to display some JSON coords
       priceMarkers: [],
-      //dummy data used as playground to display some arbitrary BTN coords
       dummyMarkers: [
         {
           coordinate: {
@@ -79,15 +76,29 @@ class DataMarkers extends React.Component {
           price: 100000,
         },
       ],
-      //get number of slider at each increment of slider bar
-      //useful var for filtering data from MongoDB to pull only items within the slected range
+      data: [
+        {
+          id: UK_DATA.FIELD1,
+          Price: UK_DATA.Price,
+          Transfer_Date: UK_DATA.Transfer_Date,
+          Postcode: UK_DATA.Postcode,
+          Property_Type: UK_DATA.Property_Type,
+          Old_New: UK_DATA.Old_New,
+          Town_City: UK_DATA.Town_City,
+          Concat_PAON_Street_Postcode: UK_DATA.Concat_PAON_Street_Postcode,
+          coordinate: {
+            latitude: UK_DATA.address_lat,
+            longitude: UK_DATA.address_long,
+          }
+        }
+      ],
+      lth: UK_DATA.length,
       sliderValue: 0,
-      //not sure?
       testData: [],
+      //sliderComplete: 0,
     };
   }
 
-//do (place random colored marker at coordinate of finger selection) when user touches map
   onMapPress(e) {
     this.setState({
       markers: [
@@ -101,7 +112,6 @@ class DataMarkers extends React.Component {
     });
   }
 
-//logic playground for placing markers on map when a SliderValue is seleted. Non-func atm
   updateMarkers() {
     const dummyMarkers = this.state.dummyMarkers; 
     const sliderValue = this.state.sliderValue;
@@ -122,7 +132,6 @@ class DataMarkers extends React.Component {
     });
   }
 
-//do everything - render function is called "reactively" when user does something
   render() {
     return (
       <View style={styles.container}>
@@ -184,107 +193,42 @@ class DataMarkers extends React.Component {
       </View>
     );
   }
-=======
-import React, {useContext} from 'react';
-import MapView from 'react-native-maps';
-import {StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-native';
-
-import {Context as LocationContext} from "../context/LocationContext";
-
-
-export default class App extends React.Component {
-    state = {
-        mapLoaded: false,
-        region: {
-            latitude: 50.860,
-            longitude: -0.0899,
-            longitudeDelta: 0.01,
-            latitudeDelta: 0.04,
-        }
-    }
-
-    componentDidMount() {
-        this.setState({mapLoaded: true});
-    }
-
-    onRegionChangeComplete = (region) => {
-        this.setState({region});
-        console.log(region);
-        
-        //Make the fetch request here! Post your location and get some points from Database.
-    }
-
-    render() {
-        const markers = [];
-        if (!this.state.mapLoaded) {
-            return (
-                <View style={styles.container}>
-                    <ActivityIndicator size="large" color="#0000ff"/>
-                    <Text>Loading...</Text>
-                </View>
-            );
-        }
-        return (
-            <View style={styles.container}>
-                <MapView
-                    region={this.state.region}
-                    style={styles.mapStyle}
-                    onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
-
-                >
-                    {markers.map(markers => (
-                        <MapView.Marker
-                            coordinate={{'latitude': markers.Latitude, 'longitude': markers.Longitude}}
-                        />
-                    ))}
-                </MapView>
-            </View>
-        );
-    }
 }
-//copied from react-native-maps
+
 DataMarkers.propTypes = {
   provider: ProviderPropType,
 };
 
-//set the styles of our react-native components
 const styles = StyleSheet.create({
-  //styles for entire render app
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
     alignItems: 'center',
   },
-  //styles for our react-native-map; taken from react-native
   map: {
     ...StyleSheet.absoluteFillObject,
   },
-  //styles for the transparent button
   bubble: {
     backgroundColor: 'rgba(255,255,255,0.7)',
     paddingHorizontal: 18,
     paddingVertical: 12,
     borderRadius: 20,
   },
-  //can delete possibly?
   latlng: {
     width: 200,
     alignItems: 'stretch',
   },
-  //can delete possibly?
   button: {
     width: 80,
     paddingHorizontal: 12,
     alignItems: 'center',
     marginHorizontal: 10,
   },
-  //styles for displaying buttons
   buttonContainer: {
     flexDirection: 'column',
     marginVertical: 20,
     backgroundColor: 'transparent',
   },
-  //styles for markers
   priceMarkers: {
     height: 30,
     width: 100,
@@ -294,7 +238,6 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     backgroundColor: '#FF7F50',
   },
-  //styles for react-native-slider; taken from react-native
   sliderContainer: {
     marginLeft: 10,
     marginRight: 10,
@@ -303,5 +246,4 @@ const styles = StyleSheet.create({
   }
 });
 
-//export all - essential for deploying app
 export default DataMarkers;
