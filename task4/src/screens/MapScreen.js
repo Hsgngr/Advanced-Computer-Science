@@ -8,13 +8,8 @@ import {
 } from 'react-native';
 import Slider from "react-native-slider";
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
-//added below import instead of using const require
-import UK_DATA from '../data/UK_DATA.json';
 
 const { width, height } = Dimensions.get('window');
-//changed from this to Data directory below
-//also switched to using import statement instead - test out!
-//const UK_DATA = require('../data/UK_DATA.json';
 const ASPECT_RATIO = width / height;
 const LATITUDE = 50.82360;
 const LONGITUDE = -0.13836;
@@ -41,15 +36,18 @@ class DataMarkers extends React.Component {
     super(props);
 
     this.state = {
+      isLoading: true, //prob delete since we don't use activity indictator atm
       region: {
         latitude: LATITUDE,
         longitude: LONGITUDE,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
+      //initialise empty array to eventually hold coords from user map-clicks
       markers: [
       ],
-      priceMarkers: [],
+      priceMarkers: [
+      ],
       dummyMarkers: [
         {
           coordinate: {
@@ -76,29 +74,28 @@ class DataMarkers extends React.Component {
           price: 100000,
         },
       ],
-      data: [
-        {
-          id: UK_DATA.FIELD1,
-          Price: UK_DATA.Price,
-          Transfer_Date: UK_DATA.Transfer_Date,
-          Postcode: UK_DATA.Postcode,
-          Property_Type: UK_DATA.Property_Type,
-          Old_New: UK_DATA.Old_New,
-          Town_City: UK_DATA.Town_City,
-          Concat_PAON_Street_Postcode: UK_DATA.Concat_PAON_Street_Postcode,
-          coordinate: {
-            latitude: UK_DATA.address_lat,
-            longitude: UK_DATA.address_long,
-          }
-        }
-      ],
-      lth: UK_DATA.length,
       sliderValue: 0,
-      testData: [],
-      //sliderComplete: 0,
     };
   }
 
+  //when data is loaded from gist, set state array vars with data
+  //same code from fetch project-v3
+  componentDidMount() {
+    return fetch('https://gist.githubusercontent.com/tiffsea/622ed936223af5a987f7a018394cb02c/raw/72360909ad6c55f43669433bfd3de020a8afbc6b/UK_DATA.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({
+          isLoading: false,
+          priceMarkers: responseJson.UK_DATA,
+        }, function () {});
+      })
+      .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  //when user clicks map, set finger coords to markers[]; give key id of +1
   onMapPress(e) {
     this.setState({
       markers: [
@@ -112,6 +109,7 @@ class DataMarkers extends React.Component {
     });
   }
 
+  //playground logic for conditional Slider filter of data; non-f atm
   updateMarkers() {
     const dummyMarkers = this.state.dummyMarkers; 
     const sliderValue = this.state.sliderValue;
@@ -149,13 +147,13 @@ class DataMarkers extends React.Component {
               pinColor={marker.color}
             />
           ))}
-          {this.state.dummyMarkers.map(someMarker => (
+          {this.state.priceMarkers.map(someMarker => (
             <Marker
-              key={someMarker.key}
-              coordinate={someMarker.coordinate}
+              key={someMarker.FIELD1}
+              coordinate={{ latitude: someMarker.address_lat, longitude: someMarker.address_long}}
             >
-              <View style={styles.priceMarkers}>
-                <Text>{someMarker.price}</Text>
+              <View style={styles.markers}>
+                <Text>{someMarker.Price}</Text>
               </View>
             </Marker>
           ))}
@@ -229,7 +227,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: 'transparent',
   },
-  priceMarkers: {
+  markers: {
     height: 30,
     width: 100,
     borderWidth: 2,
