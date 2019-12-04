@@ -28,6 +28,9 @@ npm start
 
 ```
 npm install expo-cli
+npm install react-native-maps --save-exact
+npm install react-native-elements
+npm install i --save react-native-slider
 ```
 
 ### Installing
@@ -58,6 +61,12 @@ By running npm start in repository will open a localhost in your browser where y
 npm start
 ```
 
+## Components / APIs
+react-native-slider
+react-native-maps
+react-native-elements
+<Marker />
+
 ## Running the tests
 
  * Postman for testing post requests of custom api
@@ -78,7 +87,7 @@ npm start
 * **Ege Hoşgüngör** - *Full stack developer /Team Leader* - [Hsgngr](https://github.com/Hsgngr)
 * **Alhabal, Khalil** - *Full stack developer /Team Leader*
 * **Smith, Isaraporn** - *Testing/Backend developer*
-* **Seeley, Tiffany** - *Full stack developer*
+* **Seeley, Tiffany** - *Full stack developer* [tiffsea](https://github.com/tiffsea)
 * **Li, Bolan Eve** - *Front end developer*
 * **Shao, Nian** - *Front end developer*
 
