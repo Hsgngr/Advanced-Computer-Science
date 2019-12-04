@@ -10,12 +10,13 @@ import {
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
 
 const { width, height } = Dimensions.get('window');
-
 const ASPECT_RATIO = width / height;
 const LATITUDE = 50.82360;
 const LONGITUDE = -0.13836;
-const LATITUDE_DELTA = 0.01;
+const LATITUDE_DELTA = 0.090;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+const UK_DATA = require('./pp-complete-append-lat-long-notComplete-slim.json');
+
 let id = 0;
 
 function randomColor() {
@@ -44,7 +45,7 @@ class DefaultMarkers extends React.Component {
             longitude: -0.1367,
           },
           title: "btn pier",
-          price: 400000,
+          price: 500000,
         },
         {
           coordinate: {
@@ -52,7 +53,7 @@ class DefaultMarkers extends React.Component {
             longitude: -0.1410,
           },
           title: "btn station",
-          price: 600000,
+          price: 100000,
         },
         {
           coordinate: {
@@ -60,8 +61,24 @@ class DefaultMarkers extends React.Component {
             longitude: -0.1710,
           },
           title: "hove station",
-          price: 300000,
+          price: 800000,
         },
+      ],
+      data: [
+        {
+          id: UK_DATA.FIELD1,
+          Price: UK_DATA.Price,
+          Transfer_Date: UK_DATA.Transfer_Date,
+          Postcode: UK_DATA.Postcode,
+          Property_Type: UK_DATA.Property_Type,
+          Old_New: UK_DATA.Old_New,
+          Town_City: UK_DATA.Town_City,
+          Concat_PAON_Street_Postcode: UK_DATA.Concat_PAON_Street_Postcode,
+          coordinate: {
+            latitude: UK_DATA.address_lat,
+            longitude: UK_DATA.address_long,
+          }
+        }
       ],
     };
   }
@@ -96,16 +113,16 @@ class DefaultMarkers extends React.Component {
               pinColor={marker.color}
             />
           ))}
-          {this.state.dummyMarkers.map(someMarker => (
+          {this.state.data.map(someMarker => (
             <Marker
               key={someMarker.key}
               coordinate={someMarker.coordinate}
               //>pinColor={someMarker.color}
             >
               <View style={styles.priceMarkers}>
-                <Text>{someMarker.price}</Text>
+                <Text>{someMarker.Price}</Text>
               </View>
-            />
+            </Marker>
           ))}
         </MapView>
         
@@ -115,6 +132,7 @@ class DefaultMarkers extends React.Component {
             style={styles.bubble}
           >
             <Text>tap map to insert marker</Text>
+            <Text>{this.state.data[0].Price}</Text>
           </TouchableOpacity>
         </View>
 
@@ -165,6 +183,10 @@ const styles = StyleSheet.create({
     borderRadius: 10/2,
     overflow: 'hidden',
     backgroundColor: '#FF7F50',
+  },
+  pinStyle: {
+    fontColor: '#F0FFFF',
+    alignItems: 'center',
   },
 });
 

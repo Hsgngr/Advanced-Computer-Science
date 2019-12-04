@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {Text, StyleSheet, View, TouchableOpacity, ImageBackground, SafeAreaView} from 'react-native';
+//import {Card} from 'react-native-paper';
 import {Button} from 'react-native-elements';
 
 const HomeScreen = props => {
@@ -45,6 +46,18 @@ const HomeScreen = props => {
             <Button 
               onPress= {() => props.navigation.navigate('Testing')} 
               title= "Test Cases"
+              type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('FingerTracking')} 
+              title= "FingerTracking"
+              type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('MarkerTesting')} 
+              title= "MarkerTesting"
               type="solid"
             />
           </View>
