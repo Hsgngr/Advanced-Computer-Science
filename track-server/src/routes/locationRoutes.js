@@ -62,9 +62,9 @@ router.get('/locationData2', async (req, res) => {
 
 router.post('/locationData3', async (req, res) => {
     const {sliderValue} = req.body;
-    const deneme=sliderValue;
+    const deneme=sliderValue; //This is equal to sliderValue
 //console.log(deneme);
-    if(deneme <10){
+    if(!deneme){
         return res.status(422).send({error: 'Cmon its not real price'});
     }
     try{
