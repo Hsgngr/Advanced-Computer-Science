@@ -63,12 +63,15 @@ router.get('/locationData2', async (req, res) => {
 router.post('/locationData3', async (req, res) => {
     const {sliderValue} = req.body;
     const deneme=sliderValue;
-console.log(deneme);
+//console.log(deneme);
     if(deneme <10){
         return res.status(422).send({error: 'Cmon its not real price'});
     }
     try{
-        const housingData2 = await housingData.find();
+        const housingData2 = await housingData.find({
+            AVG_Price: {$lt: deneme}
+        });
+        console.log(housingData2);
         res.send(housingData2);
     } catch (err){
         res.status(422).send({error: err.message})
