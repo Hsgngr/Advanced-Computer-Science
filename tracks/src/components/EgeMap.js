@@ -8,21 +8,21 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            list: [],
-            // list: [{
-            //     "AVG_Price": 485000,
-            //     "Latitude": 50.769929,
-            //     "Longitude": 0.254227,
-            //     "Postcode": "BN20 8EP",
-            //     "_id": "5dddbd709f268bac4efd408c",
-            // },
-            //     {
-            //         "AVG_Price": 717000,
-            //         "Latitude": 50.757016,
-            //         "Longitude": 0.266637,
-            //         "Postcode": "BN20 7QN",
-            //         "_id": "5dddbd709f268bac4efd403d",
-            //     }],
+           // list: [],
+            list: [{
+                "AVG_Price": 485000,
+                "Latitude": 50.769929,
+                "Longitude": 0.254227,
+                "Postcode": "BN20 8EP",
+                "_id": "5dddbd709f268bac4efd408c",
+            },
+                {
+                    "AVG_Price": 717000,
+                    "Latitude": 50.757016,
+                    "Longitude": 0.266637,
+                    "Postcode": "BN20 7QN",
+                    "_id": "5dddbd709f268bac4efd403d",
+                }],
             mapLoaded: false,
             userRegion: {
                 latitude: 50.860,
@@ -43,10 +43,13 @@ export default class App extends React.Component {
         //this.setState({mapLoaded: true});
         trackerApi.get('/locationData2').then(response => {
             //console.log(response);
-            this.setState({mapLoaded: true});
             this.setState({
                 list: response.data
-            });
+            })
+        }).then(response => {
+            this.setState({
+                mapLoaded:true
+            })
         });
     }
 
@@ -71,21 +74,21 @@ export default class App extends React.Component {
                     initialRegion={this.state.userRegion}
                     //region={this.state.userRegion}
                     style={styles.mapStyle}
-                    onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
+                   // onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
                 >
                     {this.state.list.map(list => (
-                        <MapView.Marker
+                        list.Latitude && list.Longitude ? <MapView.Marker
                             coordinate={{'latitude': list.Latitude, 'longitude': list.Longitude}}
                             key={list._id}
                             title={" " + list.AVG_Price}
                             onCalloutPress={this.markerClick}>
                             <MapView.Callout>
                                 <View style={styles.calloutText}>
-                                    <Text> Average Price here is {list.AVG_Price}</Text>
+                                    <Text> Average Price: {list.AVG_Price}£ </Text>
                                 </View>
                             </MapView.Callout>
 
-                        </MapView.Marker>
+                        </MapView.Marker> : null
                     ))}
                 </MapView>
             </View>
