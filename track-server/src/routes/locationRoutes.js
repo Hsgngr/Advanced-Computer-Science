@@ -4,6 +4,7 @@ const requireAuth =require('../middlewares/requireAuth');
 
 const locationData = mongoose.model('LocationData');
 const pointData = mongoose.model('PointData');
+const housingData = mongoose.model('HousingData');
 
 const router = express.Router();
 
@@ -57,6 +58,22 @@ router.post('/locationData2', async (req, res) => {
 router.get('/locationData2', async (req, res) => {
     const houseData = await pointData.find(); //Find all of them.
     res.send(houseData);
+});
+
+router.post('/locationData3', async (req, res) => {
+    const {sliderValue} = req.body;
+    const deneme=sliderValue;
+console.log(deneme);
+    if(deneme <10){
+        return res.status(422).send({error: 'Cmon its not real price'});
+    }
+    try{
+        const housingData2 = await housingData.find();
+        res.send(housingData2);
+    } catch (err){
+        res.status(422).send({error: err.message})
+    }
+
 });
 
 module.exports = router;

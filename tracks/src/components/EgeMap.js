@@ -41,7 +41,7 @@ export default class App extends React.Component {
 
     componentDidMount() {
         //this.setState({mapLoaded: true});
-        trackerApi.get('/locationData2').then(response => {
+        trackerApi.get('/locationData2',).then(response => {
             //console.log(response);
             this.setState({
                 list: response.data
@@ -51,6 +51,7 @@ export default class App extends React.Component {
                 mapLoaded:true
             })
         });
+        trackerApi.post('/locationData3', 1)
     }
 
     onRegionChangeComplete = (userRegion) => {
