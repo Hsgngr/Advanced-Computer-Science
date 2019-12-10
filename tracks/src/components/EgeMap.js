@@ -8,21 +8,9 @@ export default class App extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-           // list: [],
-            list: [{
-                "AVG_Price": 485000,
-                "Latitude": 50.769929,
-                "Longitude": 0.254227,
-                "Postcode": "BN20 8EP",
-                "_id": "5dddbd709f268bac4efd408c",
-            },
-                {
-                    "AVG_Price": 717000,
-                    "Latitude": 50.757016,
-                    "Longitude": 0.266637,
-                    "Postcode": "BN20 7QN",
-                    "_id": "5dddbd709f268bac4efd403d",
-                }],
+            list: [],
+            markerColor,
+            silderValue=0,
             mapLoaded: false,
             userRegion: {
                 latitude: 50.860,
@@ -40,8 +28,11 @@ export default class App extends React.Component {
 
 
     componentDidMount() {
-        //this.setState({mapLoaded: true});
-        trackerApi.get('/locationData2',).then(response => {
+      this.UpdateMarkers();
+    }
+i
+    UpdateMarkers(){
+        trackerApi.post('/locationData3', {...this.state.sliderValue}).then(response => {
             //console.log(response);
             this.setState({
                 list: response.data
@@ -51,7 +42,6 @@ export default class App extends React.Component {
                 mapLoaded:true
             })
         });
-        trackerApi.post('/locationData3', 1)
     }
 
     onRegionChangeComplete = (userRegion) => {
@@ -69,6 +59,7 @@ export default class App extends React.Component {
                 </View>
             );
         }
+       
         return (
             <View style={styles.container}>
                 <MapView
@@ -77,22 +68,46 @@ export default class App extends React.Component {
                     style={styles.mapStyle}
                    // onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
                 >
+                    
                     {this.state.list.map(list => (
                         list.Latitude && list.Longitude ? <MapView.Marker
                             coordinate={{'latitude': list.Latitude, 'longitude': list.Longitude}}
                             key={list._id}
-                            title={" " + list.AVG_Price}
+                            title={" " + list.AVG_Price + "at " + list.Transfer_Date + ", Postcode: " + list.Postcode }
+                            pinColor={list.MarkerColor}
                             onCalloutPress={this.markerClick}>
                             <MapView.Callout>
                                 <View style={styles.calloutText}>
-                                    <Text> Average Price: {list.AVG_Price}£ </Text>
+                                    <Text> Average Price: {list.AVG_Price}£ | Postcode: {list.Postcode} | Date: {list.Transfer_Date} </Text>
+
                                 </View>
                             </MapView.Callout>
 
                         </MapView.Marker> : null
                     ))}
+
                 </MapView>
+                <View style={styles.sliderContainer}>
+                    <Slider
+                        value={this.state.sliderValue}
+                        onValueChange={sliderValue => this.setState({ sliderValue })}
+                        minimumValue={0}
+                        maximumValue={40000000}
+                        minimumTrackTintColor='#FF4500'
+                        maximumTrackTintColor='#00CED1'
+                        thumbTintColor='#FF7F50'
+                        step={1000}
+                        onSlidingComplete={() => this.updateMarkers()}
+                    />
+                    <TouchableOpacity
+                        style={styles.bubble}
+                        //onPress={() => this.updateMarkers()}
+                    >
+                        <Text>Price: {this.state.sliderValue}</Text>
+                    </TouchableOpacity>
+                </View>
             </View>
+            
         );
     }
 }
