@@ -12,10 +12,6 @@ const MapScreen = ({navigation}) => {
     return (
         <>
             <EgeMap/>
-            <Button
-                title='Try me!'
-                onPress={showAllData}
-            />
         </>
     );
 };

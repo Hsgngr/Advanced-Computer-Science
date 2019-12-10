@@ -1,12 +1,14 @@
 require('./models/User'); //These three here because we want call them at least once before using them.
 require('./models/Track');
 require('./models/LocationData');
+require('./models/PointData');
+require('./models/HousingData');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser =  require('body-parser');
 const authRoutes = require('./routes/authRoutes');
 const trackRoutes = require('./routes/trackRoutes');
-const LocationData = require('./routes/locationRoutes');
+const LocationRoutes = require('./routes/locationRoutes');
 const requireAuth = require('./middlewares/requireAuth');
 
 
@@ -15,13 +17,14 @@ const app = express();
 app.use(bodyParser.json()); //This one should be called first otherwise express api first request authRoutes before any data get parsed.
 app.use(authRoutes);
 app.use(trackRoutes);
-app.use(LocationData);
+app.use(LocationRoutes);
 
 const  mongoUri = 'mongodb+srv://admin:passwordpassword@cluster0-u4fu8.gcp.mongodb.net/test?retryWrites=true&w=majority'
 mongoose.connect(mongoUri, {
     useNewUrlParser: true,
     useCreateIndex: true
 });
+
 
 mongoose.connection.on('connected', () => {
     console.log('Connected to Mongo instance');

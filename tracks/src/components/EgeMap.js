@@ -42,7 +42,6 @@ i
                 mapLoaded:true
             })
         });
-
     }
 
     onRegionChangeComplete = (userRegion) => {
@@ -80,6 +79,7 @@ i
                             <MapView.Callout>
                                 <View style={styles.calloutText}>
                                     <Text> Average Price: {list.AVG_Price}£ | Postcode: {list.Postcode} | Date: {list.Transfer_Date} </Text>
+
                                 </View>
                             </MapView.Callout>
 
