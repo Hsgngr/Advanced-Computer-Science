@@ -2,6 +2,7 @@ require('./models/User'); //These three here because we want call them at least 
 require('./models/Track');
 require('./models/LocationData');
 require('./models/PointData');
+require('./models/HousingData');
 const express = require('express');
 const mongoose = require('mongoose');
 const bodyParser =  require('body-parser');
