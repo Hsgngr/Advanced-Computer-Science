@@ -1,7 +1,8 @@
 import React, {useContext} from 'react';
 import MapView from 'react-native-maps';
-import {StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-native';
+import {StyleSheet, View, Dimensions, ActivityIndicator, Text, TouchableOpacity} from 'react-native';
 import trackerApi from "../api/tracker";
+import {Slider} from "react-native-elements";
 
 
 export default class App extends React.Component {
@@ -9,8 +10,7 @@ export default class App extends React.Component {
         super(props);
         this.state = {
             list: [],
-            markerColor,
-            silderValue=0,
+            sliderValue: 10001,
             mapLoaded: false,
             userRegion: {
                 latitude: 50.860,
@@ -22,24 +22,21 @@ export default class App extends React.Component {
 
     };
 
-    updateState = (values) => {
-        this.setState(values);
-    }
-
-
     componentDidMount() {
-      this.UpdateMarkers();
+        this.updateMarkers();
     }
-i
-    UpdateMarkers(){
-        trackerApi.post('/locationData3', {...this.state.sliderValue}).then(response => {
+
+    updateMarkers() {
+        let myObj = {sliderValue: this.state.sliderValue}
+        trackerApi.post('/locationData3', myObj).then(response => {
+
             //console.log(response);
             this.setState({
                 list: response.data
             })
         }).then(response => {
             this.setState({
-                mapLoaded:true
+                mapLoaded: true
             })
         });
     }
@@ -59,26 +56,27 @@ i
                 </View>
             );
         }
-       
+
         return (
             <View style={styles.container}>
                 <MapView
                     initialRegion={this.state.userRegion}
                     //region={this.state.userRegion}
                     style={styles.mapStyle}
-                   // onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
+                    // onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
                 >
-                    
+
                     {this.state.list.map(list => (
                         list.Latitude && list.Longitude ? <MapView.Marker
                             coordinate={{'latitude': list.Latitude, 'longitude': list.Longitude}}
                             key={list._id}
-                            title={" " + list.AVG_Price + "at " + list.Transfer_Date + ", Postcode: " + list.Postcode }
+                            title={" " + list.AVG_Price + "at " + list.Transfer_Date + ", Postcode: " + list.Postcode}
                             pinColor={list.MarkerColor}
                             onCalloutPress={this.markerClick}>
                             <MapView.Callout>
                                 <View style={styles.calloutText}>
-                                    <Text> Average Price: {list.AVG_Price}£ | Postcode: {list.Postcode} | Date: {list.Transfer_Date} </Text>
+                                    <Text> Average Price: {list.AVG_Price}£ | Postcode: {list.Postcode} |
+                                        Date: {list.Transfer_Date} </Text>
 
                                 </View>
                             </MapView.Callout>
@@ -90,9 +88,10 @@ i
                 <View style={styles.sliderContainer}>
                     <Slider
                         value={this.state.sliderValue}
-                        onValueChange={sliderValue => this.setState({ sliderValue })}
+                        onValueChange={sliderValue => this.setState({sliderValue})}
+                        sliderLength={Dimensions.get('window').width}
                         minimumValue={0}
-                        maximumValue={40000000}
+                        maximumValue={400000}
                         minimumTrackTintColor='#FF4500'
                         maximumTrackTintColor='#00CED1'
                         thumbTintColor='#FF7F50'
@@ -100,14 +99,13 @@ i
                         onSlidingComplete={() => this.updateMarkers()}
                     />
                     <TouchableOpacity
-                        style={styles.bubble}
-                        //onPress={() => this.updateMarkers()}
+                        onPress={() => this.updateMarkers()}
                     >
-                        <Text>Price: {this.state.sliderValue}</Text>
+                        <Text>Price: {this.state.sliderValue} £</Text>
                     </TouchableOpacity>
                 </View>
             </View>
-            
+
         );
     }
 }
@@ -123,4 +121,8 @@ const styles = StyleSheet.create({
         width: Dimensions.get('window').width,
         height: Dimensions.get('window').height,
     },
+    sliderContainer: {
+        height: 200,
+        width: Dimensions.get('window').width-100,
+    }
 });
