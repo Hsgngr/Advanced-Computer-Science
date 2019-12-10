@@ -54,6 +54,12 @@ const HomeScreen = props => {
               title= "Test Cases"
               type="solid"
             />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('CombinedMaps')} 
+              title= "Combined Maps"
+              type="solid"
+            />
           </View>
         </ImageBackground> 
       </View> 
