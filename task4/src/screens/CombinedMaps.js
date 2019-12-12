@@ -1,48 +1,3 @@
-<<<<<<< HEAD
-import React, {useContext} from 'react';
-import MapView from 'react-native-maps';
-import {StyleSheet, View, Dimensions, ActivityIndicator, Text} from 'react-native';
-
-import {Context as LocationContext} from "../context/LocationContext";
-
-export default class App extends React.Component {
-    state = {
-        mapLoaded: false,
-        region: {
-            latitude: 50.860,
-            longitude: -0.0899,
-            longitudeDelta: 0.01,
-            latitudeDelta: 0.04,
-        }
-    }
-
-    componentDidMount() {
-        this.setState({mapLoaded: true});
-    }
-
-    onRegionChangeComplete = (region) => {
-        this.setState({region});
-       // console.log(region);
-        //Make the fetch request here! Post your location and get some points from Database.
-    }
-
-    render() {
-        const markers = [];
-        if (!this.state.mapLoaded) {
-            return (
-                <View style={styles.container}>
-                    <ActivityIndicator size="large" color="#0000ff"/>
-                    <Text>Loading...</Text>
-                </View>
-            );
-        }
-        return (
-            <View style={styles.container}>
-                <MapView
-                    region={this.state.region}
-                    style={styles.mapStyle}
-                    onRegionChangeComplete={this.onRegionChangeComplete} //Whenever user stop to change region, sync with setState()
-=======
 import React from 'react';
 import {
   StyleSheet,
@@ -52,12 +7,12 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Slider from "react-native-slider";
-import MapView, { Marker, ProviderPropType } from 'react-native-maps';
+import MapView, { Marker, ProviderPropType, MAP_TYPES } from 'react-native-maps';
 
-const { width, height } = Dimensions.get('window');
+const {width, height} = Dimensions.get('window');
 const ASPECT_RATIO = width / height;
-const LATITUDE = 50.82360;
-const LONGITUDE = -0.13836;
+const SCREEN_WIDTH = width
+const SCREEN_HEIGHT = height
 const LATITUDE_DELTA = 0.01;
 const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
 let id = 0;
@@ -75,19 +30,13 @@ function heatColor() {
     .padStart(6, 0)}`;
 }
 
-class DataMarkers extends React.Component {
+class CombinedMaps extends React.Component {
   
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       isLoading: true, //prob delete since we don't use activity indictator atm
-      region: {
-        latitude: LATITUDE,
-        longitude: LONGITUDE,
-        latitudeDelta: LATITUDE_DELTA,
-        longitudeDelta: LONGITUDE_DELTA,
-      },
       //initialise empty array to eventually hold coords from user map-clicks
       fingerMarkers: [
       ],
@@ -96,12 +45,56 @@ class DataMarkers extends React.Component {
       filteredMarkers: [
       ],
       sliderValue: 0,
+      initialPosition: {
+        latitude: 0,
+        longitude: 0,
+        latitudeDelta: 0,
+        longitudeDelta: 0,
+      },
+      myPosition: { 
+        latitude: 0,
+        longitude: 0,
+      },
     };
   }
+
+  watchID: ?number = null
 
   //when data is loaded from gist, set state array vars with data
   //same code from fetch project-v3
   componentDidMount() {
+    
+    navigator.geolocation.getCurrentPosition((position) => {
+      var lat = parseFloat(position.coords.latitude)
+      var long = parseFloat(position.coords.longitude)
+
+      var initialRegion = {
+        latitude: lat,
+        longitude: long,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
+      }
+
+      this.setState({initialPosition: initialRegion})
+      this.setState({myPosition: initialRegion})
+    },
+
+    (error) => alert(JSON.stringify(error)),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000})
+
+      this.watchID = navigator.geolocation.watchPosition((position) => {
+        var lat = parseFloat(position.coords.latitude)
+        var long = parseFloat(position.coords.longitude)
+        var lastRegion = {
+          latitude: lat,
+          longitude: long,
+          longitudeDelta: LONGITUDE_DELTA,
+          latitudeDelta: LATITUDE_DELTA,
+        }
+        this.setState({initialPosition: lastRegion})
+        this.setState({myPosition: lastRegion})
+      })
+
     return fetch('https://gist.githubusercontent.com/tiffsea/622ed936223af5a987f7a018394cb02c/raw/72360909ad6c55f43669433bfd3de020a8afbc6b/UK_DATA.json')
       .then((response) => response.json())
       .then((responseJson) => {
@@ -119,6 +112,10 @@ class DataMarkers extends React.Component {
       .catch((error) => {
       console.error(error);
     });
+  }
+
+  componentWillUnmount() {
+    navigator.geolocation.clearWatch(this.watchID)
   }
 
   //when user clicks map, set finger coords to markers[]; give key id of +1
@@ -172,7 +169,8 @@ class DataMarkers extends React.Component {
         <MapView
           provider={this.props.provider}
           style={styles.map}
-          initialRegion={this.state.region}
+          region={this.state.initialPosition}
+          //initialRegion={this.state.region}
           onPress={e => this.onMapPress(e)}
         >
           {this.state.fingerMarkers.map(marker => (
@@ -192,7 +190,13 @@ class DataMarkers extends React.Component {
               </View>
             </Marker>
           ))}
-        </MapView>
+            <Marker
+              coordinate={this.state.myPosition}>
+              <View style={styles.radius}>
+                <View style={styles.marker}></View>
+              </View>
+            </Marker>
+         </MapView>
         
         <View style={styles.buttonContainer}>
           <TouchableOpacity
@@ -216,45 +220,39 @@ class DataMarkers extends React.Component {
             step={1000} //gets the increment size
             //onSlidingComplete={() => this.updateMarkers()} //{() => this.setState({priceMarkers:[]})}
           />
+          
           <TouchableOpacity
             style={styles.bubble}
             //onPress={() => this.updateMarkers()}
           >
             <Text>Price: {this.state.sliderValue}</Text>
           </TouchableOpacity>
-        </View>
->>>>>>> ead05d27ed0f4b1d13403d0466274b72b04a0a5b
 
-                >
-                    {markers.map(markers => (
-                        <MapView.Marker
-                            coordinate={{'latitude': markers.Latitude, 'longitude': markers.Longitude}}
-                        />
-                    ))}
-                </MapView>
-            </View>
-        );
-    }
+          <View style={[styles.bubble, styles.latlng]}>
+            <Text style={styles.centeredText}>
+              {this.state.initialPosition.latitude.toPrecision(7)},
+              {this.state.initialPosition.longitude.toPrecision(7)},
+              Current Location
+            </Text>
+          </View>
+
+        </View>
+
+      </View>
+    );
+  }
 }
 
+CombinedMaps.propTypes = {
+  provider: ProviderPropType,
+};
+
 const styles = StyleSheet.create({
-<<<<<<< HEAD
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    mapStyle: {
-        width: Dimensions.get('window').width,
-        height: Dimensions.get('window').height,
-    },
-});
-=======
   container: {
     ...StyleSheet.absoluteFillObject,
     justifyContent: 'flex-end',
     alignItems: 'center',
+    flex:1,
   },
   map: {
     ...StyleSheet.absoluteFillObject,
@@ -294,8 +292,30 @@ const styles = StyleSheet.create({
     marginRight: 10,
     alignItems: "stretch",
     justifyContent: "center"
-  }
+  },
+  centeredText: { 
+    textAlign: 'center' 
+  },
+  marker: {
+    height: 10,
+    width: 10,
+    borderWidth: 3,
+    borderColor: 'white',
+    borderRadius: 20/2,
+    overflow: 'hidden',
+    backgroundColor: '#007AFF',
+  },
+  radius: {
+    height: 30,
+    width: 30,
+    borderRadius: 50 / 2,
+    overflow: 'hidden',
+    backgroundColor: 'rgba(0,122,255,1.0)',
+    borderWidth: 1,
+    borderColor: 'rgba(0,112, 255,1.0)',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
 });
 
-export default DataMarkers;
->>>>>>> ead05d27ed0f4b1d13403d0466274b72b04a0a5b
+export default CombinedMaps;
