@@ -20,6 +20,12 @@ const HomeScreen = props => {
           <Separator/>
           <View style={styles.btns}>
             <Button
+              onPress= {() => props.navigation.navigate('MapScreen')}
+              title= "Map Demo"
+              type="solid"
+            />
+            <Separator/>
+            <Button
                 onPress= {() => props.navigation.navigate('FetchScreen')}
                 title= "Fetch Demo"
                 type="solid"
@@ -52,12 +58,6 @@ const HomeScreen = props => {
             <Button 
               onPress= {() => props.navigation.navigate('MarkerTesting')} 
               title= "MarkerTesting"
-              type="solid"
-            />
-            <Separator/>
-            <Button 
-              onPress= {() => props.navigation.navigate('CurrentLocation')} 
-              title= "Current Location"
               type="solid"
             />
           </View>

@@ -16,19 +16,12 @@
     "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz",
     "react-native-elements": "^1.2.7",
     "react-native-gesture-handler": "~1.3.0",
-    "react-native-maps": "^0.26.1",
+    "react-native-maps": "~0.25.0",
     "react-native-reanimated": "~1.2.0",
     "react-native-web": "^0.11.7",
     "react-navigation-stack": "^1.10.3",
     "react-navigation-tabs": "^2.6.0",
-<<<<<<< HEAD
     "@expo/vector-icons": "latest"
-=======
-    "react-interpolate-component": "^0.12.0",
-    "react-native-paper": "3.1.1",
-    "react-native-slider": "^0.11.0",
-    "react-navigation": "^4.0.10"
->>>>>>> ead05d27ed0f4b1d13403d0466274b72b04a0a5b
   },
   "devDependencies": {
     "babel-preset-expo": "^7.1.0",
