@@ -19,45 +19,45 @@ const HomeScreen = props => {
           </Text>
           <Separator/>
           <View style={styles.btns}>
-            <Button
-                onPress= {() => props.navigation.navigate('FetchScreen')}
-                title= "Fetch Demo"
-                type="solid"
-            />
-            <Separator/>
             <Button 
-              onPress= {() => props.navigation.navigate('Navigation')} 
+              onPress= {() => props.navigation.navigate('MapScreen')} 
               title= "UK Housing Prices Map"
               type="solid"
             />
             <Separator/>
             <Button 
-              onPress= {() => props.navigation.navigate('Credits')} 
-              title= "About Us"
+              onPress= {() => props.navigation.navigate('SignupScreen')} 
+              title= "Sign Up"
               type="solid"
             />
             <Separator/>
             <Button 
-              onPress= {() => props.navigation.navigate('Testing')} 
-              title= "Test Cases"
+              onPress= {() => props.navigation.navigate('SigninScreen')} 
+              title= "Sign In"
               type="solid"
             />
             <Separator/>
             <Button 
               onPress= {() => props.navigation.navigate('FingerTracking')} 
-              title= "FingerTracking"
-              type="solid"
-            />
-            <Separator/>
-            <Button 
-              onPress= {() => props.navigation.navigate('MarkerTesting')} 
-              title= "MarkerTesting"
+              title= "Finger Tracking"
               type="solid"
             />
             <Separator/>
             <Button 
               onPress= {() => props.navigation.navigate('CurrentLocation')} 
               title= "Current Location"
+              type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('TestCases')} 
+              title= "Test Cases"
+              type="solid"
+            />
+            <Separator/>
+            <Button 
+              onPress= {() => props.navigation.navigate('CombinedMaps')} 
+              title= "Combined Maps"
               type="solid"
             />
           </View>

@@ -8,13 +8,8 @@ import {
 } from 'react-native';
 import Slider from "react-native-slider";
 import MapView, { Marker, ProviderPropType } from 'react-native-maps';
-//added below import instead of using const require
-import UK_DATA from '../Data/pp-complete-append-lat-long-notComplete-slim.json'
 
 const { width, height } = Dimensions.get('window');
-//changed from this to Data directory below
-//also switched to using import statement instead - test out!
-//const UK_DATA = require('../Data/pp-complete-append-lat-long-notComplete-slim.json');
 const ASPECT_RATIO = width / height;
 const LATITUDE = 50.82360;
 const LONGITUDE = -0.13836;
@@ -41,68 +36,52 @@ class DataMarkers extends React.Component {
     super(props);
 
     this.state = {
+      isLoading: true, //prob delete since we don't use activity indictator atm
       region: {
         latitude: LATITUDE,
         longitude: LONGITUDE,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       },
-      markers: [
+      //initialise empty array to eventually hold coords from user map-clicks
+      fingerMarkers: [
       ],
-      priceMarkers: [],
-      dummyMarkers: [
-        {
-          coordinate: {
-            latitude: 50.8169,
-            longitude: -0.1367,
-          },
-          title: "btn pier",
-          price: 80000,
-        },
-        {
-          coordinate: {
-            latitude: 50.8289,
-            longitude: -0.1410,
-          },
-          title: "btn station",
-          price: 500000,
-        },
-        {
-          coordinate: {
-            latitude: 50.8351,
-            longitude: -0.1710,
-          },
-          title: "hove station",
-          price: 100000,
-        },
+      priceMarkers: [
       ],
-      data: [
-        {
-          id: UK_DATA.FIELD1,
-          Price: UK_DATA.Price,
-          Transfer_Date: UK_DATA.Transfer_Date,
-          Postcode: UK_DATA.Postcode,
-          Property_Type: UK_DATA.Property_Type,
-          Old_New: UK_DATA.Old_New,
-          Town_City: UK_DATA.Town_City,
-          Concat_PAON_Street_Postcode: UK_DATA.Concat_PAON_Street_Postcode,
-          coordinate: {
-            latitude: UK_DATA.address_lat,
-            longitude: UK_DATA.address_long,
-          }
-        }
+      filteredMarkers: [
       ],
-      lth: UK_DATA.length,
       sliderValue: 0,
-      testData: [],
-      //sliderComplete: 0,
     };
   }
 
+  //when data is loaded from gist, set state array vars with data
+  //same code from fetch project-v3
+  componentDidMount() {
+    return fetch('https://gist.githubusercontent.com/SHAONIAN94/1512f96ecdef0ba6ec1467c488530a35/raw/8002a00d932d2db318324c628387e907cd93c990/CrimeData.json')
+      .then((response) => response.json())
+      .then((responseJson) => {
+
+        this.setState({
+          isLoading: false,
+          priceMarkers: responseJson.CrimeData,
+        }, function () {});
+
+        this.setState({
+          filteredMarkers: responseJson.CrimeData,
+        }, function () {});
+
+      })
+      .catch((error) => {
+      console.error(error);
+    });
+  }
+
+  //when user clicks map, set finger coords to markers[]; give key id of +1
+  //possible deliverable for Task5
   onMapPress(e) {
     this.setState({
-      markers: [
-        ...this.state.markers,
+      fingerMarkers: [
+        ...this.state.fingerMarkers,
         {
           coordinate: e.nativeEvent.coordinate,
           key: id++,
@@ -110,26 +89,7 @@ class DataMarkers extends React.Component {
         },
       ],
     });
-  }
 
-  updateMarkers() {
-    const dummyMarkers = this.state.dummyMarkers; 
-    const sliderValue = this.state.sliderValue;
-    const newMarkers = [];
-    
-    for (var i; i < dummyMarkers.length; i++){
-      if (dummyMarkers[i].price < sliderValue+10000){
-        newMarkers.push(dummyMarkers[i])
-      };
-    }
-    this.setState({
-      priceMarkers: [
-        ...this.state.priceMarkers, 
-        {
-          newMarkers
-        }
-      ]
-    });
   }
 
   render() {
@@ -142,20 +102,13 @@ class DataMarkers extends React.Component {
           initialRegion={this.state.region}
           onPress={e => this.onMapPress(e)}
         >
-          {this.state.markers.map(marker => (
+          {this.state.priceMarkers.map(someMarker => (
             <Marker
-              key={marker.key}
-              coordinate={marker.coordinate}
-              pinColor={marker.color}
-            />
-          ))}
-          {this.state.dummyMarkers.map(someMarker => (
-            <Marker
-              key={someMarker.key}
-              coordinate={someMarker.coordinate}
+              key={someMarker.ID}
+              coordinate={{ latitude: someMarker.Latitude, longitude: someMarker.Longitude}}
             >
-              <View style={styles.priceMarkers}>
-                <Text>{someMarker.price}</Text>
+              <View style={styles.markers}>
+                <Text>{someMarker.CrimeCount}</Text>
               </View>
             </Marker>
           ))}
@@ -163,7 +116,7 @@ class DataMarkers extends React.Component {
         
         <View style={styles.buttonContainer}>
           <TouchableOpacity
-            onPress={() => this.setState({ markers: [] })}
+            onPress={() => this.setState({ fingerMarkers: [] })}
             style={styles.bubble}
           >
             <Text>tap map to insert marker</Text>
@@ -181,6 +134,7 @@ class DataMarkers extends React.Component {
             maximumTrackTintColor='#00CED1' //slider color-right
             thumbTintColor='#FF7F50' //slider color-ball
             step={1000} //gets the increment size
+            //onSlidingComplete={() => this.updateMarkers()} //{() => this.setState({priceMarkers:[]})}
           />
           <TouchableOpacity
             style={styles.bubble}
@@ -229,7 +183,7 @@ const styles = StyleSheet.create({
     marginVertical: 20,
     backgroundColor: 'transparent',
   },
-  priceMarkers: {
+  markers: {
     height: 30,
     width: 100,
     borderWidth: 2,
@@ -237,10 +191,6 @@ const styles = StyleSheet.create({
     borderRadius: 10/2,
     overflow: 'hidden',
     backgroundColor: '#FF7F50',
-  },
-  pinStyle: {
-    fontColor: '#F0FFFF',
-    alignItems: 'center',
   },
   sliderContainer: {
     marginLeft: 10,
