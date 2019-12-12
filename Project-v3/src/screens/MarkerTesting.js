@@ -110,6 +110,22 @@ class DataMarkers extends React.Component {
         },
       ],
     });
+
+    for (var i = UK_DATA.length - 1; i >= 0; i--) {
+      this.setState({
+        testData: [
+          ...this.state.testData,
+          {
+            coordinate: {
+              lat: UK_DATA[i].address_lat,
+              lng: UK_DATA[i].address_long,
+            },
+            key: UK_DATA[i].FIELD1,
+            price: UK_DATA[i].Price,
+          }
+        ]
+      })
+    }
   }
 
   updateMarkers() {
@@ -149,13 +165,14 @@ class DataMarkers extends React.Component {
               pinColor={marker.color}
             />
           ))}
-          {this.state.dummyMarkers.map(someMarker => (
+          {UK_DATA.map((someMarker, index) => (
             <Marker
-              key={someMarker.key}
-              coordinate={someMarker.coordinate}
+              key={someMarker.FIELD1}
+              coordinate={this.state.dummyMarkers.coordinate}
+              //pinColor={someMarker.color}
             >
               <View style={styles.priceMarkers}>
-                <Text>{someMarker.price}</Text>
+                <Text>{someMarker.Price}</Text>
               </View>
             </Marker>
           ))}
@@ -168,19 +185,21 @@ class DataMarkers extends React.Component {
           >
             <Text>tap map to insert marker</Text>
             <Text>tap here to erase</Text>
+            <Text>{this.state.dummyMarkers[0].price}</Text>
           </TouchableOpacity>
         </View>
 
         <View style={styles.sliderContainer}>
           <Slider
-            value={this.state.sliderValue} //update state every time slider is moved
-            onValueChange={sliderValue => this.setState({ sliderValue })} //when slider finishes, update value; we need this to use for price filtering
-            minimumValue={0} //slider min
-            maximumValue={1000000} //slider max
-            minimumTrackTintColor='#FF4500' //slider color-left
-            maximumTrackTintColor='#00CED1' //slider color-right
-            thumbTintColor='#FF7F50' //slider color-ball
-            step={1000} //gets the increment size
+            value={this.state.sliderValue}
+            onValueChange={sliderValue => this.setState({ sliderValue })}
+            minimumValue={0}
+            maximumValue={1000000}
+            minimumTrackTintColor='#FF4500'
+            maximumTrackTintColor='#00CED1'
+            thumbTintColor='#FF7F50'
+            step={1000}
+            //>onSlidingComplete={() => this.updateMarkers()}
           />
           <TouchableOpacity
             style={styles.bubble}

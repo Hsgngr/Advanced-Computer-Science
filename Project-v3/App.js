@@ -6,10 +6,10 @@ import HomeScreen from './src/screens/HomeScreen';
 import creditsScene from './src/screens/creditsScene';
 import GpsNavigation from './src/screens/GpsNavigation';
 import FetchScreen from "./src/screens/FetchScreen";
+import MapScreen from "./src/screens/MapScreen";
 import Testing from "./src/screens/Testing";
 import FingerTracking from "./src/screens/FingerTracking";
 import MarkerTesting from "./src/screens/MarkerTesting";
-import currentLocation_LatLong from "./src/screens/currentLocation_LatLong";
 //import dataFetchingPost from  './src/components/dataFetchingPost';
 
 const AppNavigator = createStackNavigator(
@@ -18,10 +18,10 @@ const AppNavigator = createStackNavigator(
     Credits: creditsScene,
     Navigation: GpsNavigation,
     FetchScreen: FetchScreen,
+    MapScreen: MapScreen,
     Testing: Testing,
     FingerTracking: FingerTracking,
     MarkerTesting: MarkerTesting,
-    CurrentLocation: currentLocation_LatLong,
   },
   {
     initialRouteName: 'Home',
