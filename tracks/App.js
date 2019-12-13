@@ -18,6 +18,7 @@ import { Provider as LocationProvider } from './src/context/LocationContext';
 import { Provider as TrackProvider } from './src/context/TrackContext';
 import { FontAwesome } from '@expo/vector-icons';
 import MapScreen from "./src/screens/MapScreen";
+import CrimeData from "./src/screens/CrimeData";
 
 const trackListFlow = createStackNavigator({
   TrackList: TrackListScreen,
@@ -33,6 +34,7 @@ const switchNavigator = createSwitchNavigator({
   }),
   mainFlow: createBottomTabNavigator({
     Map:MapScreen,
+    CrimeData: CrimeData,
     Account: AccountScreen
   })
 });

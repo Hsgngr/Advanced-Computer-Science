@@ -1,0 +1,53 @@
+Test Case 1:
+	
+
+TC001:
+
+To verify login account
+1.Sign up new user
+2.Log in existing user
+1.1Enter user id and password to sign up
+1.2Use exiting user id to sign up
+1.Any character valid for user and password
+1.2 Existing user id to sign up
+1.Allow to access the app.
+1.2 Display error
+1. accessed the app.
+1.2 Cannot access, display error
+OK
+Issa S.
+5/12/19
+
+TC002
+Initial data on the map
+1.Phone current location
+2. Zoom in/out on the map
+3.Click for house price
+1.Display house prepaid price by postcode current location area
+1.House price database
+1. Marking at the current location and nearby with marking
+1. Marking area and error latitude and longitude error
+Failed
+Issa S
+5/12/19
+
+TC003:
+UpdateMarkers Function
+1.trackerApi.post takes in sliderValue as an integer
+1.1expectation: list as response
+1.2outcome: sliderValue is defaulted to an integer which means we will always have a value to pass
+
+TC004:
+Slider is functional
+1.can slider take a new value from user?
+1.2 will state get updated?
+Passed
+Observed: slider value was updated to state and user can see this value in bubble
+
+TC005:
+Is cloud server populated with new data?
+1.is cloud deployed with mongodb?
+1.1 is mongodb connected?
+passed
+cloud is linked to application and can see user data when  fetch is made
+mongodb is connected and user is able to see price data associated with slidervalue
