@@ -1,10 +1,5 @@
 ## Advanced-Software-Engineering at University of Sussex - Group 1 TEAM project
-The purpose of this project is to create a cross-platform mobile application with agile development methodology, using edge-of-technology.
-
-# Advanced-Computer-Science
-Advanced Software Engineering Project
-
-This project is developed for course which encourage students to agile development and simulate real industry problems.
+The purpose of this project is to create a cross-platform mobile application with agile development and simulate real industry problems.
 
 ## Getting Started
 
