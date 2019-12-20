@@ -1,10 +1,5 @@
 ## Advanced-Software-Engineering at University of Sussex - Group 1 TEAM project
-The purpose of this software is to collaborate with team members and classmates from an Advanced-Software-Enginnering module at the University of Sussex.
-
-Task 1. Each group should set up a Github or Bitbucket account to be used for the project. See here for details. Deadline: Monday, 21 October 2019, at 16:00.
-Task 2. Produce a simple Android and/or iPhone or cross-platform app. See here for details. Deadline: Friday, 25 October 2019, at 16:00.
-Task 3. Produce a simple server providing services for app from Task 2. See here for details. Deadline: Monday, 4 November 2019, at 16:00.
-Task 4. Produce a visualisation for UK house price data. See here for details. Deadline: Wednesday, 4 December 2019, at 16:00.
+The purpose of this project is to create a cross-platform mobile application with agile development methodology, using edge-of-technology.
 
 # Advanced-Computer-Science
 Advanced Software Engineering Project
@@ -28,9 +23,6 @@ npm start
 
 ```
 npm install expo-cli
-npm install react-native-maps --save-exact
-npm install react-native-elements
-npm install i --save react-native-slider
 ```
 
 ### Installing
@@ -38,6 +30,7 @@ The folders that you can run "npm start" in:
   1)minimumDelivarable
   2)Project-v3
   3)task4
+  4)tracks
 
 ```
 cd minimumDelivrable
@@ -49,23 +42,11 @@ To run the task4 there are more things you should do, since it needs a local ser
 cd track-server
 npm run dev
 ```
-For every 8 hours you should change the url in Advanced-Computer-Science\task4\src\api\tracker.js
-BaseURL: '<yourURl>'
-  
+  To run the tracks (newest version of our app) 
 ```
-ngrok http 3000
-```
-By running npm start in repository will open a localhost in your browser where you can scan the qr code with your device or connect virtual devices 
-
-```
+cd tracks/
 npm start
 ```
-
-## Components / APIs
-react-native-slider
-react-native-maps
-react-native-elements
-<Marker />
 
 ## Running the tests
 
@@ -80,6 +61,7 @@ react-native-elements
 * [Express Api](https://expressjs.com/en/api.html) - Building a REST API: Express, Node.js web application framework
 * [MongoDB Atlas](https://www.mongodb.com/cloud/atlas) - Global cloud database service deploy with Google Cloud Platform
 * [Ngrok](https://ngrok.com) - Public URLs for exposing your local web server.
+* [Heroku](https://dashboard.heroku.com) - Heroku is a platform as a service (PaaS) that enables developers to build, run, and operate applications entirely in the cloud.
 
 
 ## Authors
@@ -87,11 +69,7 @@ react-native-elements
 * **Ege Hoşgüngör** - *Full stack developer /Team Leader* - [Hsgngr](https://github.com/Hsgngr)
 * **Alhabal, Khalil** - *Full stack developer /Team Leader*
 * **Smith, Isaraporn** - *Testing/Backend developer*
-* **Seeley, Tiffany** - *Full stack developer* - [tiffsea](https://github.com/tiffsea)
-* **Li, Bolan Eve** - *Front end developer*
-* **Shao, Nian** - *Front end developer*
-
-See also the list of [contributers](https://github.com/your/project/contributors) who participated in this project.
+* **Seeley, Tiffany** - *Full stack developer* -
 
 
 ## Acknowledgments
